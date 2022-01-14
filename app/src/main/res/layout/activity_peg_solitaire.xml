@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:id="@+id/tr_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_00"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_01"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_02"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_03"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_04"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_05"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_06"
+                style="@style/estilo_celda" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tr_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_10"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_11"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_12"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_13"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_14"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_15"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_16"
+                style="@style/estilo_celda" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tr_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_20"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_21"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_22"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_23"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_24"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_25"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_26"
+                style="@style/estilo_celda" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tr_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_30"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_31"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_32"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_33"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_34"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_35"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_36"
+                style="@style/estilo_celda" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tr_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_40"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_41"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_42"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_43"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_44"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_45"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_46"
+                style="@style/estilo_celda" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tr_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_50"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_51"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_52"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_53"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_54"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_55"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_56"
+                style="@style/estilo_celda" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tr_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_60"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_61"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_62"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_63"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_64"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_65"
+                style="@style/estilo_celda" />
+            <TextView
+                android:id="@+id/tv_66"
+                style="@style/estilo_celda" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

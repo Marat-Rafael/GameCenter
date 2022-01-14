@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+    android:shadowColor="@color/menu_glow"
+    android:shadowDx="15"
+    android:shadowDy="15"
+    android:shadowRadius="15"
+    android:textColor="@color/menu_color"
+    android:textSize="@dimen/menu_elige_juego_titulos_60">
+
+</TextView>

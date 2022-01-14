@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.gamecenternuevo">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.GameCenterNuevo">
+        <activity
+            android:name=".SettingActivityPeg"
+            android:exported="false" />
+        <activity
+            android:name=".HelpActivityPeg"
+            android:exported="false" />
+        <activity
+            android:name=".SettingActivity2048"
+            android:exported="false" />
+        <activity
+            android:name=".HelpActivity2048"
+            android:exported="false" />
+        <activity
+            android:name=".MenuActivityPegSolitaire"
+            android:exported="false"
+            android:parentActivityName=".EligeJuegoActivity" />
+        <activity
+            android:name=".MenuActivity2048"
+            android:exported="false"
+            android:parentActivityName=".EligeJuegoActivity" />
+        <activity
+            android:name=".Activity2048"
+            android:exported="false"
+            android:parentActivityName=".MenuActivity2048" />
+        <activity
+            android:name=".ActivityPegSolitaire"
+            android:exported="false"
+            android:parentActivityName=".MenuActivityPegSolitaire" />
+        <activity
+            android:name=".EligeJuegoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

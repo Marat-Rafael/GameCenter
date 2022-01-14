@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/casilla_jugable.xml" value="0.3828125" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/casilla_rellena.xml" value="0.3828125" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/casilla_salto_permitido.xml" value="0.35" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/casilla_selecionada.xml" value="0.35" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/casilla_vacia.xml" value="0.35" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/celda.xml" value="0.3828125" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/destacado.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/selector_para_listView.xml" value="0.35" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_2048.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_elige_juego.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_menu_2048.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_menu_peg.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_peg_solitaire.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_splash.xml" value="0.25" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/menu_elige_juego.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/menu_item.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/menu/gameoption2048.xml" value="0.2994652406417112" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/menu/gameoptionpeg.xml" value="0.3625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
