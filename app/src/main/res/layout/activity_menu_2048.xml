@@ -63,7 +63,7 @@
     <ImageView
         android:id="@+id/img_menu_bottom"
         android:layout_width="match_parent"
-        android:src="@drawable/sith250"
+        android:src="@drawable/sith200"
         android:scaleType="centerInside"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"/>

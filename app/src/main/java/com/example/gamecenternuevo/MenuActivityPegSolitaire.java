@@ -46,8 +46,8 @@ public class MenuActivityPegSolitaire extends AppCompatActivity {
                String strText = textView.getText().toString();
                switch (strText){
                    case "Play Game":
-                       mostrarToast("juego");
-                       startActivity(new Intent(getApplicationContext(), com.example.gamecenternuevo.ActivityPegSolitaire.class));
+                       mostrarToast("juego Peg inicia");
+                       startActivity(new Intent(getApplicationContext(), ActivityPegSolitaire.class));
                        break;
                    case "View Scores":
                        mostrarToast("puntuacion");

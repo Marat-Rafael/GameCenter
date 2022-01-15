@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SplashActivity extends AppCompatActivity {
@@ -15,16 +16,60 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        setTitle("Espantapajaros");
 
-        TextView eft = findViewById(R.id.tv_eft);
 
-        Animation mover = AnimationUtils.loadAnimation(this, R.anim.animation_splash);
+        // detectamos layout principal
+        LinearLayout linearLayout = findViewById(R.id.linear_layout_principal);
+        // identificamos imagen
+        TextView espantapajarosImagen = findViewById(R.id.tv_espantapajaros);
+        // identificamos nueva clase de TextWriter, campo donde va aparecer texto
+        TypeWriter typeWriter = findViewById(R.id.tv_desc_espanta);
 
-        // animacion
-        eft.startAnimation(mover);
+        // cargamos animacion de fadeIn
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        // cargamos animacion de fadeOut
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
-        // animationListener
-        mover.setAnimationListener(new Animation.AnimationListener() {
+        // animacion para que aparecen todos los elementos de activity
+        linearLayout.startAnimation(fadeIn);
+        espantapajarosImagen.startAnimation(fadeIn);
+        typeWriter.startAnimation(fadeIn);
+
+
+        // animationListener para detectar cuando acaba animacion
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            /**
+             * cuando animacion fadeIn termina
+             * @param animation
+             */
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                String texto = " \"SI TAN SOLO TUVIERA UN CEREBRO....\" ";
+
+                typeWriter.setText("");
+                typeWriter.setCharacterDelay(150);
+                typeWriter.animateText(texto);
+
+
+                // animacion fadeOut
+                linearLayout.startAnimation(fadeOut);
+                espantapajarosImagen.startAnimation(fadeOut);
+                typeWriter.startAnimation(fadeOut);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
 
@@ -33,6 +78,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 startActivity(new Intent(SplashActivity.this, EligeJuegoActivity.class));
+                // cetrramos splash activity, NO podemos volver a este activity
                 SplashActivity.this.finish();
             }
 

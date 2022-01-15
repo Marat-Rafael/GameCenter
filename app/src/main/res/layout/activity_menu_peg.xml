@@ -63,10 +63,10 @@
     <ImageView
         android:id="@+id/img_menu_bottom"
         android:layout_width="match_parent"
-        android:src="@drawable/sith250"
-        android:scaleType="centerInside"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"/>
+        android:scaleType="centerInside"
+        android:src="@drawable/sith200"/>
 
 
 </RelativeLayout>
