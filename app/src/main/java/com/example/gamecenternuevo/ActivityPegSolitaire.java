@@ -2,6 +2,7 @@ package com.example.gamecenternuevo;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -27,10 +28,8 @@ public class ActivityPegSolitaire extends AppCompatActivity {
     // creamos un objeto de SoundPlayer
     private static SoundPlayer soundPlayer;
 
-
     private static final String TAG = "JUEGO";
     public TextView[][] matrixTextView;
-
 
     public boolean terminado;
 
@@ -364,7 +363,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                     Log.d(TAG, "salto origen: i=" + i + " | j=" + j);
                     // origen i j , destino i+2
                     if ((i + 2 < matrixTextView.length)) {
-                        if (esCasillaBuscada(matrixTextView[i + 2][j], R.drawable.target75)) {
+                        if (esCasillaBuscada(matrixTextView[i + 2][j], R.drawable.target74)) {
                             Log.d(TAG, "destino i=" + (i + 2) + " | j=" + j);
                             convertirCasilla_A_Vacia(matrixTextView[i + 1][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
@@ -374,7 +373,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                     }
                     // destino i - 2
                     if (i - 2 >= 0) {
-                        if (esCasillaBuscada(matrixTextView[i - 2][j], R.drawable.target75)) {
+                        if (esCasillaBuscada(matrixTextView[i - 2][j], R.drawable.target74)) {
                             Log.d(TAG, "destino i=" + (i - 2) + " | j=" + j);
                             convertirCasilla_A_Vacia(matrixTextView[i - 1][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
@@ -384,7 +383,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                     }
                     // si j + 2
                     if (j + 2 < matrixTextView[0].length) {
-                        if (esCasillaBuscada(matrixTextView[i][j + 2], R.drawable.target75)) {
+                        if (esCasillaBuscada(matrixTextView[i][j + 2], R.drawable.target74)) {
                             Log.d(TAG, "destino i=" + i + " | j=" + (j + 2));
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i][j + 1]);
@@ -394,7 +393,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                     }
                     // si j - 2
                     if (j - 2 >= 0) {
-                        if (esCasillaBuscada(matrixTextView[i][j - 2], R.drawable.target75)) {
+                        if (esCasillaBuscada(matrixTextView[i][j - 2], R.drawable.target74)) {
                             Log.d(TAG, "destino i=" + i + " | j=" + (j - 2));
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i][j - 1]);
@@ -405,6 +404,8 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                 }
             }
         }
+        // tengo que eliminar listener de los botones
+        listenerNull();
         // volvemos a buscar, detectar boton pulsado y saltar
         volverBuscarDetectarSaltar();
     }
@@ -419,6 +420,17 @@ public class ActivityPegSolitaire extends AppCompatActivity {
      */
     private boolean esCasillaBuscada(TextView textView, int drawableId) {
         return textView.getBackground().getConstantState().equals(getResources().getDrawable(drawableId, null).getConstantState());
+    }
+
+    /**
+     * metodo para eliminar listener de los elementos
+     */
+    public void listenerNull(){
+        for (int i = 0; i < matrixTextView.length; i++) {
+            for (int j = 0; j < matrixTextView[0].length; j++) {
+                matrixTextView[i][j].setOnClickListener(null);
+            }
+        }
     }
 
 
@@ -449,7 +461,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
     public void convertirCasilla_A_Salto_Permitido(TextView textView) {
         //Log.d(TAG, "entra convertirCasilla salto permitido");
         //cambiarBackground(textView, R.drawable.casilla_salto_permitido);
-        cambiarBackground(textView, R.drawable.target75);
+        cambiarBackground(textView, R.drawable.target74);
         //Log.d(TAG, "sale convertirCasilla salto permitido");
     }
 
