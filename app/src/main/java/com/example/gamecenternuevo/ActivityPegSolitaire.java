@@ -1,15 +1,9 @@
 package com.example.gamecenternuevo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.AnimationDrawable;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -19,9 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
 
 public class ActivityPegSolitaire extends AppCompatActivity {
 
@@ -30,8 +23,10 @@ public class ActivityPegSolitaire extends AppCompatActivity {
 
     private static final String TAG = "JUEGO";
     public TextView[][] matrixTextView;
-
-    public boolean terminado;
+    private boolean casillasJugablesEncontradas;
+    private boolean gameOver;
+    private int puntuacion;
+    private String NombreJugador;
 
     // public static boolean booleanCasillaEligida = false;
 
@@ -44,7 +39,6 @@ public class ActivityPegSolitaire extends AppCompatActivity {
         // iniciamos soundPlayer
         soundPlayer = new SoundPlayer(this);
 
-        terminado = false;
 
         // creamos matriz
         matrixTextView = new TextView[][]{
@@ -110,8 +104,9 @@ public class ActivityPegSolitaire extends AppCompatActivity {
         for (int i = 0; i < matrixTextView.length; i++) {
             for (int j = 0; j < matrixTextView[0].length; j++) {
                 // cambiarBackground(matrixTextView[i][j], R.drawable.casilla_rellena);
-                matrixTextView[i][j].setBackgroundResource(R.drawable.casilla_rellena);
-                matrixTextView[i][j].setText(i + " " + j);
+                convertirCasilla_A_Rellena(matrixTextView[i][j]);
+                // matrixTextView[i][j].setBackgroundResource(R.drawable.casilla_rellena);
+                // matrixTextView[i][j].setText("i="+i + " j=" + j);
             }
         }
         Log.d(TAG, "sale llenar matriz");
@@ -166,6 +161,10 @@ public class ActivityPegSolitaire extends AppCompatActivity {
      * busca todas casillas jugables para casillas vacias
      */
     public void buscarTodasCasillasJugables() {
+
+        casillasJugablesEncontradas = false;
+        int numeroDeCasillasEncontradas = 0;
+
         Log.d(TAG, "entra buscar todas casillas jugables  --- V2 ---");
         for (int i = 0; i < matrixTextView.length; i++) {
             for (int j = 0; j < matrixTextView[0].length; j++) {
@@ -179,6 +178,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             // comprobamos que i + 2 esta rellena
                             if (matrixTextView[i + 2][j].getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.casilla_rellena, null).getConstantState())) {
                                 convertirCasilla_A_Jugable(matrixTextView[i + 2][j]);
+                                numeroDeCasillasEncontradas++;
                             }
                         }
                     }
@@ -191,6 +191,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             if (matrixTextView[i - 2][j].getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.casilla_rellena, null).getConstantState())) {
                                 // cambiamos a jugable
                                 convertirCasilla_A_Jugable(matrixTextView[i - 2][j]);
+                                numeroDeCasillasEncontradas++;
                             }
                         }
                     }
@@ -204,6 +205,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             if (matrixTextView[i][j + 2].getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.casilla_rellena, null).getConstantState())) {
                                 // convertimos en casilla jugable
                                 convertirCasilla_A_Jugable(matrixTextView[i][j + 2]);
+                                numeroDeCasillasEncontradas++;
                             }
                         }
                     }
@@ -216,24 +218,96 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             if (matrixTextView[i][j - 2].getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.casilla_rellena, null).getConstantState())) {
                                 // si cumple - convertimos en jugable
                                 convertirCasilla_A_Jugable(matrixTextView[i][j - 2]);
+                                numeroDeCasillasEncontradas++;
                             }
                         }
                     }
                 }
             }
         }
+        // comprobamos si hay posibles saltos
+        if(numeroDeCasillasEncontradas == 0){
+            contarNumeroCasillasRellenas();
+        }
         Log.d(TAG, "sale buscar todas casillas jugables  --- V2 ---");
     }
 
-    private void animarRotate(TextView textView) {
+    private void animarEscaladoHastaDesaparecer(TextView textView) {
 
         Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.scale2);
         textView.startAnimation(animation2);
 
     }
 
+    private void animarAlfa(TextView textView){
+        Animation animationAlfa = AnimationUtils.loadAnimation(this, R.anim.anim_alfa);
+        textView.startAnimation(animationAlfa);
+    }
+
+
     /**
-     *
+     * metodo para determinar fin de juego
+     * contamos numero de casillas rellenas
+     * si es = 1 - juego ganado
+     * si es mas > 1 juego perdido
+     * salte alertDialog que nos lleva Menu Del juego
+     */
+    public void contarNumeroCasillasRellenas(){
+
+        int numeroCasillasRellenas = 0;
+        for (int i = 0; i < matrixTextView.length ; i++) {
+            for (int j = 0; j < matrixTextView[0].length; j++) {
+                if(esCasillaBuscada(matrixTextView[i][j], R.drawable.casilla_rellena)){
+                    numeroCasillasRellenas ++;
+                }
+            }
+        }
+        if( numeroCasillasRellenas == 1){
+            mostrarToast("Victoria!!!");
+            gameOver = true;
+            //------ AlertBuilder
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Victoria");
+            builder.setIcon(R.drawable.sith_logo);
+            builder.setMessage("Has ganado partida !");
+            soundPlayer.playImperialSong();
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(getApplicationContext(), MenuActivityPegSolitaire.class);
+                    ActivityPegSolitaire.this.finish();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        if( numeroCasillasRellenas > 1){
+            mostrarToast("Has Perdido");
+            gameOver = true;
+            // ---- AlertBuilder
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("perdido");
+            builder.setIcon(R.drawable.jedi_logo);
+            builder.setMessage("Has perdido partida");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(getApplicationContext(), MenuActivityPegSolitaire.class);
+                    ActivityPegSolitaire.this.finish();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+
+    /**
+     * Metodo para recorrer matriz y
+     * 1 - colocar a Todas casillas que puenen ser jugadas Listener
+     * 2 - y convertimos casilla pulsada a casilla selecionada
+     * 3 - se activa sonido recarga de arma
+     * 4 - llamamos metodo 'detectarCasillaSelecionada'
+     * 5 - y convertimos resto de botones jugables a rellenas
      */
     public void listenerParaCasillasJugablesConvertirSelecionada() {
         for (int i = 0; i < matrixTextView.length; i++) {
@@ -245,7 +319,6 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             v.setBackgroundResource(R.drawable.casilla_selecionada);
                             soundPlayer.playRecoil();
                             detectarCasillaSelecionada();
-
                             // resto convertimos en casillas rellenas
                             for (int i = 0; i < matrixTextView.length; i++) {
                                 for (int j = 0; j < matrixTextView[0].length; j++) {
@@ -261,6 +334,15 @@ public class ActivityPegSolitaire extends AppCompatActivity {
         }
     }
 
+    /**
+     * Metodo para recorrer toda matriz buscando casilla selecionada
+     * 1 - detectamos casilla selecionada
+     * 2 - comprobamos que no casillas vecinas que pueden ser usadas en juego no sobrepasan matriz y sean activas
+     * 3 - comprobamos i + 1, i + 2  si son casillas rellena y vacias convertimos ultima en 'salto_permitido'
+     * 4 - ponemos casilla salto_permitido' a la escucha
+     * 5 - si casilla salto permitido esta pulsado llamamos metodo 'realizarSalto'
+     *
+     */
     public void detectarCasillaSelecionada() {
         Log.d(TAG, "entramos detectar casilla selecionada");
         for (int i = 0; i < matrixTextView.length; i++) {
@@ -274,14 +356,13 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             if (esCasillaBuscada(matrixTextView[i + 2][j], R.drawable.casilla_vacia)) {
                                 Log.d(TAG, " i=" + i + " | i+2=" + (i + 2) + "|  j=" + j);
                                 convertirCasilla_A_Salto_Permitido(matrixTextView[i + 2][j]);
-
                                 // ponemos a la escucha
                                 matrixTextView[i + 2][j].setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         v.setOnClickListener(null);
                                         // repintamos celdas
-                                        realizarSaltoNuevo();
+                                        realizarSalto();
                                     }
                                 });
                             }
@@ -300,7 +381,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         v.setOnClickListener(null);
-                                        realizarSaltoNuevo();
+                                        realizarSalto();
                                     }
                                 });
                             }
@@ -318,7 +399,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         v.setOnClickListener(null);
-                                        realizarSaltoNuevo();
+                                        realizarSalto();
                                     }
                                 });
                             }
@@ -336,7 +417,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         v.setOnClickListener(null);
-                                        realizarSaltoNuevo();
+                                        realizarSalto();
                                     }
                                 });
                             }
@@ -350,23 +431,34 @@ public class ActivityPegSolitaire extends AppCompatActivity {
     }
 
     /**
-     * Metodo para convertir
-     * casilla selecionada a vacia
-     * casilla objetivo a rellena
-     * casilla entremedio en vacia
+     *
+     * Metodo para realizar movimiento
+     * consiste en :
+     *
+     * 1 - casilla selecionada se convierte a vacia
+     * 2 - casilla target se convierta a rellena
+     * 3 - casilla entre estas dos se convierte en vacia en vacia
+     * 4 - se pronuncia sonido del disparo
+     * 5 - eliminamos todos Listener posibles
+     * 6 - llamamos al metodo 'volverBuscarDetectarSaltar()'
      */
-    private void realizarSaltoNuevo() {
+    private void realizarSalto() {
+        // animacion para borrar celda
+;
+
         Log.d(TAG, "entramos realizar salto");
         for (int i = 0; i < matrixTextView.length; i++) {
             for (int j = 0; j < matrixTextView[0].length; j++) {
                 if (esCasillaBuscada(matrixTextView[i][j], R.drawable.casilla_selecionada)) {
                     Log.d(TAG, "salto origen: i=" + i + " | j=" + j);
-                    // origen i j , destino i+2
+                    // i + 2
                     if ((i + 2 < matrixTextView.length)) {
                         if (esCasillaBuscada(matrixTextView[i + 2][j], R.drawable.target74)) {
                             Log.d(TAG, "destino i=" + (i + 2) + " | j=" + j);
-                            convertirCasilla_A_Vacia(matrixTextView[i + 1][j]);
+                            // animacion falla
+                            // matrixTextView[i + 1][j].startAnimation(animationAlfa);
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
+                            convertirCasilla_A_Vacia(matrixTextView[i + 1][j]);
                             convertirCasilla_A_Rellena(matrixTextView[i + 2][j]);
                             soundPlayer.playShoot();
                         }
@@ -375,8 +467,10 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                     if (i - 2 >= 0) {
                         if (esCasillaBuscada(matrixTextView[i - 2][j], R.drawable.target74)) {
                             Log.d(TAG, "destino i=" + (i - 2) + " | j=" + j);
-                            convertirCasilla_A_Vacia(matrixTextView[i - 1][j]);
+                            // animacion falla
+                            // matrixTextView[i - 1][j].startAnimation(animationAlfa);
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
+                            convertirCasilla_A_Vacia(matrixTextView[i - 1][j]);
                             convertirCasilla_A_Rellena(matrixTextView[i - 2][j]);
                             soundPlayer.playShoot();
                         }
@@ -385,6 +479,8 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                     if (j + 2 < matrixTextView[0].length) {
                         if (esCasillaBuscada(matrixTextView[i][j + 2], R.drawable.target74)) {
                             Log.d(TAG, "destino i=" + i + " | j=" + (j + 2));
+                            // animacion falla
+                            // matrixTextView[i][j + 1].startAnimation(animationAlfa);
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i][j + 1]);
                             convertirCasilla_A_Rellena(matrixTextView[i][j + 2]);
@@ -395,6 +491,8 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                     if (j - 2 >= 0) {
                         if (esCasillaBuscada(matrixTextView[i][j - 2], R.drawable.target74)) {
                             Log.d(TAG, "destino i=" + i + " | j=" + (j - 2));
+                            // animacion falla
+                            // matrixTextView[i][j - 1].startAnimation(animationAlfa);
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i][j - 1]);
                             convertirCasilla_A_Rellena(matrixTextView[i][j - 2]);
@@ -423,7 +521,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
     }
 
     /**
-     * metodo para eliminar listener de los elementos
+     * metodo para eliminar listener de todos los elementos de matriz
      */
     public void listenerNull(){
         for (int i = 0; i < matrixTextView.length; i++) {
@@ -434,13 +532,20 @@ public class ActivityPegSolitaire extends AppCompatActivity {
     }
 
 
-
+    /**
+     *  cambiamos fondo del textView a que pasamos como parametro
+     * @param textView
+     * @param idRes
+     */
     private void cambiarBackground(@NonNull TextView textView, int idRes) {
         textView.setBackgroundResource(idRes);
     }
 
 
-
+    /**
+     * convertimos casilla dada a la casilla vacia
+     * @param textView
+     */
     public void convertirCasilla_A_Vacia(TextView textView) {
         //Log.d(TAG, "entra convertirCasillaVacia");
         cambiarBackground(textView, R.drawable.casilla_vacia);
@@ -483,6 +588,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
         cambiarBackground(textView, R.drawable.casilla_rellena);
         //Log.d(TAG, "sale convertirCasillaRellena");
     }
+
 
 
     /**

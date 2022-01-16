@@ -18,7 +18,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         setTitle("Espantapajaros");
 
-
         // detectamos layout principal
         LinearLayout linearLayout = findViewById(R.id.linear_layout_principal);
         // identificamos imagen

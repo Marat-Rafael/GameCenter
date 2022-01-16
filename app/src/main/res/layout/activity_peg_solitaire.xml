@@ -2,12 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    android:gravity="center"
     android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/campo_info"
+        android:layout_gravity="top"
+        android:id="@+id/layout_info"
+        android:layout_width="360dp"
+        android:layout_height="150dp">
+
+        <TextView
+            android:id="@+id/tv_jugador"
+            style="@style/tv_dentro_info"
+            android:text="JUGADOR: " />
+
+        <TextView
+            android:id="@+id/tv_jugador_name"
+            style="@style/tv_dentro_info"
+            android:layout_toRightOf="@+id/tv_jugador"
+            android:text="nombre..." />
+
+        <TextView
+            android:id="@+id/tv_puntuacion"
+            style="@style/tv_dentro_info"
+            android:layout_below="@+id/tv_jugador"
+            android:text="SCORE: " />
+
+        <TextView
+            android:id="@+id/tv_puntuacion_numero"
+            style="@style/tv_dentro_info"
+            android:layout_below="@+id/tv_jugador_name"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/tv_puntuacion"
+            android:text="puntuacion..." />
+    </RelativeLayout>
 
 
     <TableLayout
+        android:layout_margin="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

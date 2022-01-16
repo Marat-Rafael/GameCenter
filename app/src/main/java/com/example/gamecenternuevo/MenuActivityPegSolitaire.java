@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MenuActivityPegSolitaire extends AppCompatActivity {
 
-
     String [] items;
     ListView menuList;
 
@@ -36,6 +35,7 @@ public class MenuActivityPegSolitaire extends AppCompatActivity {
 
         //cargarListViewEstandart();
        cargarListViewPersonalizado();
+
 
        // creamos listener
        menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

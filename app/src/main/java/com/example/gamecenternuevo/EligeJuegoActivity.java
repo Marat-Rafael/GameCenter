@@ -1,6 +1,7 @@
 package com.example.gamecenternuevo;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,11 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class EligeJuegoActivity extends AppCompatActivity {
 
     ListView menuListEligeJuego;
     String [] juegos;
+
+    private static SoundPlayer soundPlayer ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +26,29 @@ public class EligeJuegoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_elige_juego);
         setTitle("Elige Juego");
 
+        soundPlayer = new SoundPlayer(this);
+
+        // ----------------animamos background del constraint layout -------------------------------
+        ConstraintLayout constraintLayout = findViewById(R.id.layout_elige_juego);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(2500);
+        animationDrawable.start();
+        //-------------------------------fin animacion----------------------------------------------
+
         // identificamos ListView
         menuListEligeJuego = (ListView) findViewById(R.id.listView_elige_juego);
 
         // creamos array de strings
         juegos = new String[]{
-                "2048",
-                "PEG"
+                getString(R.string.starWars2048),
+                getString(R.string.starWarsPeg)
         };
 
-
         cargarListViewPersonalizado();
+
+        // ----------------- Iniciamos sonido  || por que no va bien ?------------------------------
+        soundPlayer.playImperialSong();
 
         // creamos listener
         menuListEligeJuego.setOnItemClickListener(new AdapterView.OnItemClickListener() {
