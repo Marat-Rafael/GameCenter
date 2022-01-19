@@ -2,17 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_activity_setting_2048"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingActivity2048">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_setting_2048"
+        style="@style/estilo_titulo_paginas_extra"
         android:text="SETTING 2048"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067"
-        style="@style/estilo_titulo_paginas_extra" />
+        app:layout_constraintVertical_bias="0.067" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,12 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_activity_scores_peg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ScoresActivity2048">
 
     <TextView
-
+        android:id="@+id/textView_scores_2048"
         style="@style/estilo_titulo_paginas_extra"
         android:text="SCORES 2048"
         app:layout_constraintBottom_toBottomOf="parent"

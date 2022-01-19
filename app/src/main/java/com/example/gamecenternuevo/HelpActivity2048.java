@@ -9,6 +9,6 @@ public class HelpActivity2048 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help2048);
+        setContentView(R.layout.activity_help_2048);
     }
 }

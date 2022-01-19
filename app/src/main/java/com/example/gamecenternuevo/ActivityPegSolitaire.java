@@ -41,6 +41,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
         // iniciamos soundPlayer
         soundPlayerPeg = new SoundPlayer(this);
 
+        // animamos background ( cambia colores)
         animarBackgroundPeg();
 
         // creamos matriz

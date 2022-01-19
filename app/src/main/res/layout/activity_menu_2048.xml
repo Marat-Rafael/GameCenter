@@ -67,7 +67,7 @@
         android:layout_height="175dp"
         android:layout_alignParentBottom="true"
         android:scaleType="centerInside"
-        android:src="@drawable/gta200" />
+        android:src="@drawable/eft_250" />
 
 
 </RelativeLayout>

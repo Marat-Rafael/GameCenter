@@ -8,7 +8,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -44,12 +47,12 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         constraintLayout.setOnTouchListener(this);
         soundPlayer2048 = new SoundPlayer(this);
 
-        matrizValores = new int[][]{
-                {2, 2, 2, 2},
-                {2, 2, 2, 2},
-                {2, 2, 2, 2},
-                {2, 2, 2, 2}
-        };
+//        matrizValores = new int[][]{
+//                {2, 2, 2, 2},
+//                {2, 2, 2, 2},
+//                {2, 2, 2, 2},
+//                {2, 2, 2, 2}
+//        };
 
 
         animarBackground2048();
@@ -73,10 +76,10 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     }
 
     public void juego() {
-        // relacionalosMatrizConTablero();
-        // crearMatrizValores();
+
+        crearMatrizValores();
         repintarValoresEnCasillas();
-        // crearRandom();
+        crearRandom();
 
     }
 
@@ -169,7 +172,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
 
 
             } else if (motionEvent1.getY() < motionEvent.getY()) {
-                Log.d(TAG,"onFling arriba");
+                Log.d(TAG, "onFling arriba");
                 soundPlayer2048.playRifle();
                 moverArribaMatrizValores();
             }
@@ -193,44 +196,30 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
      */
     public void crearMatrizValores() {
         matrizValores = new int[][]{
-                {2, 2, 2, 2},
+                {0, 0, 0, 0},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0}
         };
     }
 
+    /**
+     * Metodo para mostrar valores de matriz int[][] en el tablero
+     */
     public void repintarValoresEnCasillas() {
 
         for (int i = 0; i < matrizValores.length; i++) {
             for (int j = 0; j < matrizValores[0].length; j++) {
-                String string = "R.id.tv_" + i + "" + j;
-                Log.d(TAG, string);
-
                 String textViewID = "tv_" + i + "" + j;
+                // OJO !!! usamos getResouces().getIdentifier() !!!!!
                 int resId = getResources().getIdentifier(textViewID, "id", getPackageName());
-                Log.d(TAG, "" + resId);
+                // Log.d(TAG, "" + resId);
                 auxTextView = findViewById(resId);
                 // auxTextView.setText(i+""+j);
 
                 auxTextView.setText("" + matrizValores[i][j]);
             }
         }
-    }
-
-
-    /**
-     * OBSOLETO
-     * metodo para relacionar matriz con layout
-     */
-    public void relacionalosMatrizConTablero() {
-
-        matriz = new TextView[][]{
-                {findViewById(R.id.tv_00), findViewById(R.id.tv_01), findViewById(R.id.tv_02), findViewById(R.id.tv_03)},
-                {findViewById(R.id.tv_10), findViewById(R.id.tv_11), findViewById(R.id.tv_12), findViewById(R.id.tv_13)},
-                {findViewById(R.id.tv_20), findViewById(R.id.tv_21), findViewById(R.id.tv_22), findViewById(R.id.tv_23)},
-                {findViewById(R.id.tv_30), findViewById(R.id.tv_31), findViewById(R.id.tv_32), findViewById(R.id.tv_33)},
-        };
     }
 
 
@@ -310,30 +299,77 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     }
 
     /**
-     * metodo que genera  numero 2 con probabilidad 80%
-     * o 4 con probabilidad 20%
+     * metodo que genera  numero 2 con probabilidad 90%
+     * o 4 con probabilidad 10%
      *
      * @return numero
      */
     public int generar2o4() {
         Random random = new Random();
         int numero = random.nextInt(100);
-        if (numero < 80) {
+        if (numero < 90) {
             return 2;
         } else {
             return 4;
         }
     }
 
+    /**
+     * metodo nos devuelve coordenada de una casilla random
+     *
+     * @return
+     */
+    private int[] determinarUnNumeroRandomParaNuevaCasilla() {
+        int numerosCero = 0;
+        // creamos array para guardar dos numeros I y J
+        int[] coordenadas = new int[2];
+        // determinamos cuantas casillas vacias hay
+        for (int i = 0; i < matrizValores.length; i++) {
+            for (int j = 0; j < matrizValores[0].length; j++) {
+                if (matrizValores[i][j] == 0) {
+                    numerosCero++;
+                }
+            }
+        }
+        Random random_I = new Random();
+        Random random_J = new Random();
+        int numero_en_fila_I = random_I.nextInt(numerosCero);
+        int numero_en_fila_J = random_J.nextInt(numerosCero);
 
+        // recorremos segunda vez matriz para determinar esta casilla
+        int contador = 0;
+        for (int i = 0; i < matrizValores.length; i++) {
+            for (int j = 0; j < matrizValores[0].length; j++) {
+                if (matrizValores[i][j] == 0) {
+                    contador++;
+                    if (contador == numero_en_fila_I) {
+                        coordenadas[0] = i;
+                    }
+                    if (contador == numero_en_fila_J) {
+                        coordenadas[1] = j;
+                    }
+                }
+            }
+        }
+    return coordenadas;
+    } // end of determinarUnNumeroRandomParaNuevaCasilla()
+
+    private void generarNuevoNumeroEnTablero(){
+        int[] arraycoordenadas = determinarUnNumeroRandomParaNuevaCasilla();
+
+        int coordenada_I = arraycoordenadas[0];
+        int coordenada_J = arraycoordenadas[1];
+        int numeroRandom = generar2o4();
+        matrizValores[coordenada_I][coordenada_J] = numeroRandom;
+
+    }
 
 
     /**
      * ABAJO !!!
      * metodo para mover numeros de matriz abajo y sumar iguales
-     *
      */
-    private void moverAbajoMatrizValores(){
+    private void moverAbajoMatrizValores() {
 
         //  identificamos  4 arrays simple con las que trabajamos , son columnas del matriz
         int[] arrayColumna1 = new int[]{
@@ -370,6 +406,9 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         // pasamos
         pasarDatosDeColumnasAlMatriz(columna1, columna2, columna3, columna4);
 
+        // generamos un nuevo numero en el tablero
+        generarNuevoNumeroEnTablero();
+
         // pasamos datos de matriz int[][] a layout, para mostrar
         repintarValoresEnCasillas();
 
@@ -378,9 +417,8 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     /**
      * ARRIBA !!!
      * metodo para mover numeros de matriz abajo y sumar iguales
-     *
      */
-    private void moverArribaMatrizValores(){
+    private void moverArribaMatrizValores() {
 
         //  identificamos  4 arrays simple con las que trabajamos , son columnas del matriz
         int[] arrayColumna1 = new int[]{
@@ -428,6 +466,9 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
 
         // pasamos
         pasarDatosDeColumnasAlMatriz(col1_INV, col2_INV, col3_INV, col4_INV);
+
+        // nuevo random en tablero
+        generarNuevoNumeroEnTablero();
 
         // pasamos datos de matriz int[][] a layout, para mostrar
         repintarValoresEnCasillas();
@@ -484,35 +525,22 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         int[] fila4_izq = invertiraArray(fila4);
 
         // pasamos datos de los 4 arrays simples a int[][] matrizValores
-        pasarDatosDeFilasAlMatriz(fila1_izq,fila2_izq,fila3_izq,fila4_izq);
+        pasarDatosDeFilasAlMatriz(fila1_izq, fila2_izq, fila3_izq, fila4_izq);
+
+        generarNuevoNumeroEnTablero();
 
         // volvemos a repintar datos de matrizValores en el layout
         repintarValoresEnCasillas();
 
     } // end of moverIzquerdaMatrizValores()
 
+
     /**
-     * INVERTIR
-     * porque otro metodo lo deja alineado a la derecha
-     *
-     * @param array
-     * @return
-     */
-    private int[] invertiraArray(int[] array) {
-        int[] arrayInvertido = new int[array.length];
-
-        for (int i = 0, j = array.length-1; i < array.length; i++, j--) {
-            arrayInvertido[j] = array[i];
-        }
-        return arrayInvertido;
-    } // end invertirArray()
-
-    /** DERECHA !!!
+     * DERECHA !!!
      * metodo para mover numeros de las filas a la derecha
      * y sumar iguales
      */
     public void moverDerechaMatrizValores() {
-        Log.d(TAG, " entra metodo moverDerecha matrizValores");
 
         // creamos arrays simples para trabajar
         int[] arrayFila1 = new int[]{
@@ -549,9 +577,29 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         // pasamos datos de mos arrays simples a la matrizValores int[][]
         pasarDatosDeFilasAlMatriz(fila1, fila2, fila3, fila4);
 
+        // generamos un nuevo numero random en el tablero
+        generarNuevoNumeroEnTablero();
+
         // volvemos a repintar numeros de matrizValores en layout
         repintarValoresEnCasillas();
     }
+
+    /**
+     * INVERTIR
+     * porque otro metodo lo deja alineado a la derecha
+     *
+     * @param array
+     * @return
+     */
+    private int[] invertiraArray(int[] array) {
+        int[] arrayInvertido = new int[array.length];
+
+        for (int i = 0, j = array.length - 1; i < array.length; i++, j--) {
+            arrayInvertido[j] = array[i];
+        }
+        return arrayInvertido;
+    } // end invertirArray()
+
 
     /**
      * DATOS EN FILAS
@@ -589,6 +637,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     /**
      * DATOS EN COLUMNAS
      * metodo para pasar datos de los arrays simple a las columnas
+     *
      * @param arrayColumna0
      * @param arrayColumna1
      * @param arrayColumna2
@@ -617,7 +666,8 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         matrizValores[3][3] = arrayColumna3[3];
     }// end pasarDatosDeColumnaAlMatriz
 
-    /** MOVER SUMAR MOVER
+    /**
+     * MOVER SUMAR MOVER
      * metodp que lleva dentro 3 metodos
      * 1 - ordena array , todos numeros se mueven a la derecha, zeros a la izquerda
      * 2 - summa si hay dos numeros iguales al lado
@@ -676,7 +726,6 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         }
         return array;
     }
-
 
 
 } // -- fin main
