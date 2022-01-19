@@ -10,11 +10,11 @@
     tools:context=".SplashActivity">
 
     <TextView
-        android:layout_marginTop="50dp"
         android:id="@+id/tv_espantapajaros"
         android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
         android:background="@drawable/espantapajaros" />
 
     <com.example.gamecenternuevo.TypeWriter

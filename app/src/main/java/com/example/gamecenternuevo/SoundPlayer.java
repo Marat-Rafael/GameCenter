@@ -14,6 +14,7 @@ public class SoundPlayer {
     private static int shot;
     private static int type;
     private static int imperialSong;
+    private static int rifle;
 
         // --- soundPool is Depricated in api 21 (lolipop
         // -----opcional
@@ -46,6 +47,7 @@ public class SoundPlayer {
         recoil = soundPool.load(context,R.raw.kurok_rev,1);
         type = soundPool.load(context,R.raw.single_key_type,1);
         imperialSong = soundPool.load(context,R.raw.imperial,1);
+        rifle = soundPool.load(context,R.raw.rifle,1);
     }
 
     // ------------------------------- METODOS -----------------------------------------------------
@@ -68,5 +70,9 @@ public class SoundPlayer {
     public void playImperialSong(){
         // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
         soundPool.play(imperialSong,1.0f,1.0f,1,0,1.0f);
+    }
+    public void playRifle(){
+        // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
+        soundPool.play(rifle,1.0f,1.0f,1,0,1.0f);
     }
 }

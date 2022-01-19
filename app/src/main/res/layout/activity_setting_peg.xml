@@ -8,11 +8,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="300dp"
-        android:layout_height="51dp"
-        android:gravity="center"
         android:text="SETTING PEG"
-        android:textSize="40dp"
+        style="@style/estilo_titulo_paginas_extra"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

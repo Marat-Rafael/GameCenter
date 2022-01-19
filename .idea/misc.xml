@@ -21,6 +21,7 @@
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/casilla_rellena.xml" value="0.2125" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/casilla_selecionada.xml" value="0.2125" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/casilla_vacia.xml" value="0.2125" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/celda.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_2048.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_elige_juego.xml" value="0.19635416666666666" />
@@ -28,7 +29,8 @@
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_help_peg.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_menu_2048.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_menu_peg.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_peg_solitaire.xml" value="0.33" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_peg_solitaire.xml" value="0.22" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_scores2048.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_scores_peg.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_setting2048.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_setting_peg.xml" value="0.22" />

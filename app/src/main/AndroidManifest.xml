@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameCenterNuevo">
         <activity
+            android:name=".ScoresActivity2048"
+            android:exported="false" />
+        <activity
             android:name=".ScoresActivityPeg"
             android:exported="false" />
         <activity

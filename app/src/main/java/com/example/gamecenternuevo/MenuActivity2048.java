@@ -1,15 +1,18 @@
 package com.example.gamecenternuevo;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class MenuActivity2048 extends AppCompatActivity {
 
@@ -35,6 +38,8 @@ public class MenuActivity2048 extends AppCompatActivity {
 
         //cargarListViewEstandart();
        cargarListViewPersonalizado();
+
+       animarMenuBackground2048();
 
        // creamos listener
        menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,6 +72,8 @@ public class MenuActivity2048 extends AppCompatActivity {
        });
     }
 
+
+
     public void mostrarToast(String string){
         Toast.makeText(getApplicationContext(), string, Toast.LENGTH_SHORT).show();
     }
@@ -91,5 +98,18 @@ public class MenuActivity2048 extends AppCompatActivity {
 
         // añadimos adapter al ListView
         menuList.setAdapter(adapt);
+    }
+
+    /**
+     * Metodo para animar Background
+     */
+    private void animarMenuBackground2048() {
+        // ----------------animamos background del constraint layout -------------------------------
+        RelativeLayout relativeLayout = findViewById(R.id.layout_relative_menu_2048);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(2500);
+        animationDrawable.start();
+        //-------------------------------fin animacion----------------------------------------------
     }
 }

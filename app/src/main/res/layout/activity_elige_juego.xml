@@ -12,7 +12,7 @@
         android:id="@+id/listView_elige_juego"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:divider="@drawable/lightsaber2"
+        android:divider="@drawable/flame"
         android:listSelector="@drawable/selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

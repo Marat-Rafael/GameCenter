@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingActivity2048">
+    tools:context=".ScoresActivity2048">
 
     <TextView
-        android:id="@+id/textView"
-        android:text="SETTING 2048"
+
+        style="@style/estilo_titulo_paginas_extra"
+        android:text="SCORES 2048"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067"
-        style="@style/estilo_titulo_paginas_extra" />
+        app:layout_constraintVertical_bias="0.066" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

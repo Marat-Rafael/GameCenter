@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/layout_relative_menu_2048"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/gradient_list"
     tools:context=".MenuActivity2048">
 
     <RelativeLayout
@@ -20,7 +21,7 @@
             android:layout_height="75dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/sith_logo" />
+            android:src="@drawable/ak_74" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -42,7 +43,7 @@
             android:layout_height="75dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/jedi_logo" />
+            android:src="@drawable/ak_74_rev" />
 
     </RelativeLayout>
 
@@ -58,15 +59,15 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="109dp"
-        android:divider="@drawable/lightsaber1" />
+        android:divider="@drawable/bullet2_50_rev" />
 
     <ImageView
         android:id="@+id/img_menu_bottom"
         android:layout_width="match_parent"
-        android:src="@drawable/sith200"
-        android:scaleType="centerInside"
+        android:layout_height="175dp"
         android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"/>
+        android:scaleType="centerInside"
+        android:src="@drawable/gta200" />
 
 
 </RelativeLayout>

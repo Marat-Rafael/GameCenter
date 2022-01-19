@@ -1,11 +1,13 @@
 package com.example.gamecenternuevo;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,9 @@ public class MenuActivityPegSolitaire extends AppCompatActivity {
 
         //cargarListViewEstandart();
        cargarListViewPersonalizado();
+
+       // animar background
+        animarMenuBackgroundPeg();
 
 
        // creamos listener
@@ -90,5 +95,18 @@ public class MenuActivityPegSolitaire extends AppCompatActivity {
 
         // añadimos adapter al ListView
         menuList.setAdapter(adapt);
+    }
+
+    /**
+     * Metodo para animar Background
+     */
+    private void animarMenuBackgroundPeg() {
+        // ----------------animamos background del constraint layout -------------------------------
+        RelativeLayout relativeLayout = findViewById(R.id.layout_relative_menu_peg);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(2500);
+        animationDrawable.start();
+        //-------------------------------fin animacion----------------------------------------------
     }
 }

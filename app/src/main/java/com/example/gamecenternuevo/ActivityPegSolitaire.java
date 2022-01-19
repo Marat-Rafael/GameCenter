@@ -3,6 +3,7 @@ package com.example.gamecenternuevo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,11 +16,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class ActivityPegSolitaire extends AppCompatActivity {
 
     // creamos un objeto de SoundPlayer
-    private static SoundPlayer soundPlayer;
+    private static SoundPlayer soundPlayerPeg;
 
     private static final String TAG = "JUEGO";
     public TextView[][] matrixTextView;
@@ -37,8 +39,9 @@ public class ActivityPegSolitaire extends AppCompatActivity {
         setTitle("Peg Solitaire");
 
         // iniciamos soundPlayer
-        soundPlayer = new SoundPlayer(this);
+        soundPlayerPeg = new SoundPlayer(this);
 
+        animarBackgroundPeg();
 
         // creamos matriz
         matrixTextView = new TextView[][]{
@@ -57,13 +60,13 @@ public class ActivityPegSolitaire extends AppCompatActivity {
     }
 
     /**
+     *  METODO PRINCIPAL JUEGO
      * metodo que contiene todos metodos del juego
      */
     public void juegoBase() {
         llenarMatrix();
         eliminarCasillasEsquina();
         generarCasillaVaciaEnCentro();
-
         buscarTodasCasillasJugables();
         listenerParaCasillasJugablesConvertirSelecionada();
         detectarCasillaSelecionada();
@@ -74,6 +77,19 @@ public class ActivityPegSolitaire extends AppCompatActivity {
         buscarTodasCasillasJugables();
         listenerParaCasillasJugablesConvertirSelecionada();
         detectarCasillaSelecionada();
+    }
+
+    /**
+     * Metodo para animar Background
+     */
+    private void animarBackgroundPeg() {
+        // ----------------animamos background del constraint layout -------------------------------
+        ConstraintLayout constraintLayout = findViewById(R.id.layout_principal_peg);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(2500);
+        animationDrawable.start();
+        //-------------------------------fin animacion----------------------------------------------
     }
 
 
@@ -268,9 +284,9 @@ public class ActivityPegSolitaire extends AppCompatActivity {
             //------ AlertBuilder
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Victoria");
-            builder.setIcon(R.drawable.sith_logo);
+            builder.setIcon(R.drawable.ak_74);
             builder.setMessage("Has ganado partida !");
-            soundPlayer.playImperialSong();
+            soundPlayerPeg.playImperialSong();
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -287,7 +303,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
             // ---- AlertBuilder
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("perdido");
-            builder.setIcon(R.drawable.jedi_logo);
+            builder.setIcon(R.drawable.gun_rosa_75);
             builder.setMessage("Has perdido partida");
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
@@ -317,7 +333,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             v.setBackgroundResource(R.drawable.casilla_selecionada);
-                            soundPlayer.playRecoil();
+                            soundPlayerPeg.playRecoil();
                             detectarCasillaSelecionada();
                             // resto convertimos en casillas rellenas
                             for (int i = 0; i < matrixTextView.length; i++) {
@@ -460,7 +476,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i + 1][j]);
                             convertirCasilla_A_Rellena(matrixTextView[i + 2][j]);
-                            soundPlayer.playShoot();
+                            soundPlayerPeg.playShoot();
                         }
                     }
                     // destino i - 2
@@ -472,7 +488,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i - 1][j]);
                             convertirCasilla_A_Rellena(matrixTextView[i - 2][j]);
-                            soundPlayer.playShoot();
+                            soundPlayerPeg.playShoot();
                         }
                     }
                     // si j + 2
@@ -484,7 +500,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i][j + 1]);
                             convertirCasilla_A_Rellena(matrixTextView[i][j + 2]);
-                            soundPlayer.playShoot();
+                            soundPlayerPeg.playShoot();
                         }
                     }
                     // si j - 2
@@ -496,7 +512,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i][j - 1]);
                             convertirCasilla_A_Rellena(matrixTextView[i][j - 2]);
-                            soundPlayer.playShoot();
+                            soundPlayerPeg.playShoot();
                         }
                     }
                 }
