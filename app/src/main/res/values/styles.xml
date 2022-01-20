@@ -31,13 +31,15 @@
         <item name="android:shadowDy">15</item>
         <item name="android:shadowDx">15</item>
         <item name="android:shadowRadius">15</item>
-        <item name="android:shadowColor">@color/white</item>
-        <item name="android:textSize">36sp</item>
+        <item name="android:shadowColor">@color/grey</item>
+        <item name="android:textSize">48sp</item>
+        <item name="android:textStyle">bold</item>
+
     </style>
 
     <style name="estilo_titulo_paginas_extra">
         <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">75dp</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">40dp</item>
         <item name="android:textColor">@color/black</item>

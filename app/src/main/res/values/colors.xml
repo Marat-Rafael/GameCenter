@@ -19,4 +19,5 @@
     <color name="red">#FFFF0000</color>
     <color name="gold">#FFFFD700</color>
     <color name="eft_launcher_background">#FFFF0000</color>
+    <color name="blue">#FF0000ff</color>
 </resources>
