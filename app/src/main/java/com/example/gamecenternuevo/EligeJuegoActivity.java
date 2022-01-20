@@ -59,12 +59,12 @@ public class EligeJuegoActivity extends AppCompatActivity {
                 String texto = textView.getText().toString();
                 switch(texto){
                     case "2048":
-                        mostrarToast("2048");
+                        // mostrarToast("2048");
                         // abrimos actividad del menu para juego 2048
                         startActivity(new Intent(getApplicationContext(), MenuActivity2048.class));
                         break;
                     case "PEG":
-                        mostrarToast("PEG");
+                        // mostrarToast("PEG");
                         // abrimos actividad PegSolitaire
                         startActivity(new Intent(getApplicationContext(), com.example.gamecenternuevo.MenuActivityPegSolitaire.class));
                         break;
