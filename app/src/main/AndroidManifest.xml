@@ -2,17 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gamecenternuevo">
 
-    <!--
-        android:icon="@mipmap/gamecenter_launcher"
-        android:roundIcon="@mipmap/gamecenter_launcher"
-         // esta en rojo, pero funciona ?¿
-         -->
     <application
         android:fullBackupOnly="true"
         android:allowBackup="true"
-        android:icon="@mipmap/gamecenter_launcher"
+        android:icon="@mipmap/eft_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/gamecenter_launcher"
+        android:roundIcon="@mipmap/eft_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameCenterNuevo">
         <activity
