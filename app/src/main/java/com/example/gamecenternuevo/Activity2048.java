@@ -80,7 +80,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
 
         crearMatrizValores();
         repintarValoresEnCasillas();
-        //crearRandom();
+        crearRandom();
 
     }
 
@@ -197,10 +197,10 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
      */
     public void crearMatrizValores() {
         matrizValores = new int[][]{
-                {2, 2, 2, 4},
-                {4, 2, 2, 2},
-                {4, 4, 2, 2},
-                {8, 4, 4, 4}
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
         };
     }
 
