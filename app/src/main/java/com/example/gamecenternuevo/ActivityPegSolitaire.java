@@ -617,13 +617,18 @@ public class ActivityPegSolitaire extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
+
         getMenuInflater().inflate(R.menu.gameoptionpeg, menu);
-        menu.findItem(R.id.help_menu_item).setIntent(
+
+        // creamos help menu
+        menu.findItem(R.id.help_menu_item_help_peg).setIntent(
                 new Intent(this, HelpActivityPeg.class));
-        menu.findItem(R.id.setting_menu_item).setIntent(
+        menu.findItem(R.id.help_menu_item_setting_peg).setIntent(
+                new Intent(this, SettingActivityPeg.class));
+        menu.findItem(R.id.help_menu_item_score_peg).setIntent(
                 new Intent(this, SettingActivityPeg.class));
         return true;
     }
 
-}
+}// --- end of
 

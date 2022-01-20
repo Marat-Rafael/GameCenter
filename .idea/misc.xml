@@ -26,10 +26,11 @@
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_2048.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_elige_juego.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_help2048.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_help_2048.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_help_peg.xml" value="0.33" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_menu_2048.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_menu_peg.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_peg_solitaire.xml" value="0.22" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_peg_solitaire.xml" value="0.25" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_scores2048.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_scores_peg.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_setting2048.xml" value="0.36666666666666664" />
@@ -39,6 +40,9 @@
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/menu_item.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/menu/gameoption2048.xml" value="0.2994652406417112" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/menu/gameoptionpeg.xml" value="0.3625" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/mipmap-anydpi-v26/gameCenter_launcher.xml" value="0.22291666666666668" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/mipmap-anydpi-v26/gameCenter_launcher_round.xml" value="0.3828125" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/mipmap-anydpi-v26/gamecenter_launcher.xml" value="0.2734375" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26871794871794874" />
       </map>
     </option>

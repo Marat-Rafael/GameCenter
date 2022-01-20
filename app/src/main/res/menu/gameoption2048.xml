@@ -2,13 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/setting_menu_item"
-        android:title="@string/menu_item_settings"
+        android:id="@+id/help_menu_item_setting_2048"
+        android:title="@string/menu_item_setting"
         android:icon="@drawable/setting2"> </item>
     <item
-        android:id="@+id/help_menu_item"
+        android:id="@+id/help_menu_item_help_2048"
         android:title="@string/menu_item_help"
         android:icon="@drawable/help_blue"> </item>
+    <item
+        android:id="@+id/help_menu_item_score_2048"
+        android:title="@string/menu_item_scores"
+        android:icon="@drawable/cup25"> </item>
 
 
 </menu>

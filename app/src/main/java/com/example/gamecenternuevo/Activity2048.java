@@ -1,9 +1,11 @@
 package com.example.gamecenternuevo;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -351,10 +353,10 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                 }
             }
         }
-    return coordenadas;
+        return coordenadas;
     } // end of determinarUnNumeroRandomParaNuevaCasilla()
 
-    private void generarNuevoNumeroEnTablero(){
+    private void generarNuevoNumeroEnTablero() {
         int[] arraycoordenadas = determinarUnNumeroRandomParaNuevaCasilla();
 
         int coordenada_I = arraycoordenadas[0];
@@ -587,6 +589,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     /**
      * INVERTIR
      * porque otro metodo lo deja alineado a la derecha
+     * al invertir sera alineado a la izquerda
      *
      * @param array
      * @return
@@ -713,13 +716,19 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
      * @return
      */
     private int[] sumarNumerosIgualesDerecha(int[] array) {
+        // estu numero guarda valor nuevo despues de sumar dos casillas iguales
+        // lo aplicamos despues para evitar que casillas sumadas vuelven a sumarse
+        int numeroSumado = -1;
+        //-------------------
         for (int i = array.length; i >= 0; i--) {
             for (int j = array.length - 1; j >= 0; j--) {
                 if (j - 1 >= 0) {
-                    if (array[j - 1] == array[j]) {
+                    // comprobamos si son iguales y que no sea valor que acabamos de sumar ya
+                    if ((array[j - 1] == array[j]) && (array[j - 1] != numeroSumado)) {
                         int aux = array[j];
                         array[j - 1] = 0;
                         array[j] = aux * 2;
+                        numeroSumado = aux * 2;
                     }
                 }
             }
@@ -727,6 +736,27 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         return array;
     }
 
+    /**
+     *  metodo sobreescrito para usar menu de ayuda
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu); // borramos return !!! que se genera automaticamente
+        getMenuInflater().inflate(R.menu.gameoption2048, menu);
 
+        // creamos help menu
+        menu.findItem(R.id.help_menu_item_help_2048).setIntent(
+                new Intent(this, HelpActivity2048.class));
+        menu.findItem(R.id.help_menu_item_setting_2048).setIntent(
+                new Intent(this, SettingActivity2048.class));
+        menu.findItem(R.id.help_menu_item_score_2048).setIntent(
+                new Intent(this, SettingActivity2048.class));
+
+        return true;
+    }
 } // -- fin main
+
+
 

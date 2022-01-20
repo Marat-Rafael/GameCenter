@@ -31,7 +31,7 @@ public class MenuActivityPegSolitaire extends AppCompatActivity {
         items = new String[]{
                 getResources().getString(R.string.menu_item_play),
                 getResources().getString(R.string.menu_item_scores),
-                getResources().getString(R.string.menu_item_settings),
+                getResources().getString(R.string.menu_item_setting),
                 getResources().getString(R.string.menu_item_help),
         };
 
@@ -51,18 +51,25 @@ public class MenuActivityPegSolitaire extends AppCompatActivity {
                String strText = textView.getText().toString();
                switch (strText){
                    case "Play Game":
-                       mostrarToast("juego Peg inicia");
+                       // mostrarToast("juego Peg inicia");
                        startActivity(new Intent(getApplicationContext(), ActivityPegSolitaire.class));
                        break;
+
                    case "View Scores":
-                       mostrarToast("puntuacion");
+                       // mostrarToast("puntuacion");
+                       startActivity(new Intent(getApplicationContext(), ScoresActivityPeg.class));
                        break;
+
                    case "Help":
-                       mostrarToast("ayuda");
+                       // mostrarToast("ayuda");
+                       startActivity(new Intent(getApplicationContext(), HelpActivityPeg.class));
                        break;
+
                    case "Setting":
-                       mostrarToast("configuracion");
+                       // mostrarToast("configuracion");
+                       startActivity(new Intent(getApplicationContext(), SettingActivityPeg.class));
                        break;
+
                    default:
                        break;
                }

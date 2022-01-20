@@ -3,8 +3,8 @@
     android:shareInterpolator="false">
 
     <alpha
-        android:startOffset="9000"
-        android:duration="3000"
+        android:startOffset="15000"
+        android:duration="2500"
         android:fromAlpha="1.0"
         android:toAlpha="0.0">
     </alpha>

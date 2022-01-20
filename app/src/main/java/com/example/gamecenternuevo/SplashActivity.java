@@ -16,7 +16,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        setTitle("Espantapajaros");
+        setTitle("Espantapajaros, Mago Oz");
 
         // detectamos layout principal
         LinearLayout linearLayout = findViewById(R.id.linear_layout_principal);
@@ -24,6 +24,9 @@ public class SplashActivity extends AppCompatActivity {
         TextView espantapajarosImagen = findViewById(R.id.tv_espantapajaros);
         // identificamos nueva clase de TextWriter, campo donde va aparecer texto
         TypeWriter typeWriter = findViewById(R.id.tv_desc_espanta);
+
+
+
 
         // cargamos animacion de fadeIn
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -34,7 +37,6 @@ public class SplashActivity extends AppCompatActivity {
         linearLayout.startAnimation(fadeIn);
         espantapajarosImagen.startAnimation(fadeIn);
         typeWriter.startAnimation(fadeIn);
-
 
         // animationListener para detectar cuando acaba animacion
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
@@ -49,14 +51,17 @@ public class SplashActivity extends AppCompatActivity {
              */
             @Override
             public void onAnimationEnd(Animation animation) {
-                String texto = " \"SI TAN SOLO TUVIERA UN CEREBRO....\" ";
+                String t1 = "\"SI TAN SOLO TUVIERA UN CEREBRO....\"\n";
+                String t2 = "\n(El mago de Oz)\nEspantapájaros";
+                // String texto = " \"SI TAN SOLO TUVIERA UN CEREBRO....\" \n      \"Espantapajaros\" Mago Oz  ";
+                String texto = t1+t2;
 
                 typeWriter.setText("");
                 typeWriter.setCharacterDelay(150);
                 typeWriter.animateText(texto);
 
 
-                // animacion fadeOut
+                // animacion fadeOut empieza en 15 segundos
                 linearLayout.startAnimation(fadeOut);
                 espantapajarosImagen.startAnimation(fadeOut);
                 typeWriter.startAnimation(fadeOut);
@@ -74,10 +79,15 @@ public class SplashActivity extends AppCompatActivity {
 
             }
 
+            /**
+             * Al terminar animacion abrimos otra actividad
+             * y cerramos actividad del splash
+             * @param animation
+             */
             @Override
             public void onAnimationEnd(Animation animation) {
                 startActivity(new Intent(SplashActivity.this, EligeJuegoActivity.class));
-                // cetrramos splash activity, NO podemos volver a este activity
+                // cerramos splash activity, NO podemos volver a este activity
                 SplashActivity.this.finish();
             }
 

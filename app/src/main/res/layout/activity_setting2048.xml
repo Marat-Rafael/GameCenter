@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_activity_setting_2048"
     android:layout_width="match_parent"
+    android:background="@drawable/gradient_list"
     android:layout_height="match_parent"
     tools:context=".SettingActivity2048">
 

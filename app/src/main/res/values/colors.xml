@@ -18,4 +18,5 @@
     <color name="yellow">#FFFFFF00</color>
     <color name="red">#FFFF0000</color>
     <color name="gold">#FFFFD700</color>
+    <color name="gamecenter_launcher_background">#FFFF0000</color>
 </resources>
