@@ -1,5 +1,6 @@
 package com.example.gamecenternuevo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
@@ -30,7 +32,6 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     TextView auxTextView;
     private boolean gameOver = false;
     GestureDetector gestureDetector;
-    TextView[][] matriz;
     int[][] matrizValores;
     private ConstraintLayout constraintLayout;
     private static SoundPlayer soundPlayer2048;
@@ -80,7 +81,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
 
         crearMatrizValores();
         repintarValoresEnCasillas();
-        crearRandom();
+        crearRandom2();
 
     }
 
@@ -181,16 +182,6 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         return false;
     }
 
-    /**
-     * metodo para mostrar coordenadas de la celda
-     */
-    public void pintarValores() {
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[0].length; j++) {
-                matriz[i][j].setText(i + " " + j);
-            }
-        }
-    }
 
     /**
      *
@@ -244,45 +235,60 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                     auxTextView.setBackground(getResources().getDrawable(R.drawable.celda_2048_1024, null));
                 } else if (matrizValores[i][j] == 2048) {
                     auxTextView.setBackground(getResources().getDrawable(R.drawable.celda_2048_2048, null));
-                }
-                else{
+                } else if (matrizValores[i][j] == 4096) {
+                    auxTextView.setBackground(getResources().getDrawable(R.drawable.celda_2048_new, null));
+                } else {
                     auxTextView.setBackground(getResources().getDrawable(R.drawable.celda_2048_2048, null));
                 }
             }
         }
     }
 
-//    private void pintarSegunValor() {
-//        for (int i = 0; i < matrizValores.length; i++) {
-//            for (int j = 0; j < matrizValores[0].length; j++) {
-//                String textViewID = "tv_" + i + "" + j;
-//                // OJO !!! usamos getResouces().getIdentifier() !!!!!
-//                int resId = getResources().getIdentifier(textViewID, "id", getPackageName());
-//                // Log.d(TAG, "" + resId);
-//                auxTextView = findViewById(resId);
-//                // auxTextView.setText(i+""+j);
-//
-//                // auxTextView.setText("" + matrizValores[i][j]);
-//            }
-//        }
+
+//    /**
+//     * OBSOLETO
+//     * creamos 2 numeros random
+//     * para coordenada de una casilla random
+//     */
+//    public void crearRandom() {
+//        Random random1 = new Random();
+//        int num1 = random1.nextInt(matrizValores.length);
+//        Log.d(TAG, "primer random = " + num1);
+//        Random random2 = new Random();
+//        int num2 = random2.nextInt(matrizValores[0].length);
+//        Log.d(TAG, "segundo random = " + num2);
+//        matrizValores[num1][num2] = 2;
+//        repintarValoresEnCasillas();
 //    }
 
-
-
-    /**
-     * OBSOLETO
-     * creamos 2 numeros random
-     * para coordenada de una casilla random
-     */
-    public void crearRandom() {
-        Random random1 = new Random();
-        int num1 = random1.nextInt(matrizValores.length);
-        Log.d(TAG, "primer random = " + num1);
-        Random random2 = new Random();
-        int num2 = random2.nextInt(matrizValores[0].length);
-        Log.d(TAG, "segundo random = " + num2);
-        matrizValores[num1][num2] = 2;
+    private void crearRandom2() {
+        boolean encontradoEspacioLibre = false;
+        int num1;
+        int num2;
+        do {
+            Random random1 = new Random();
+            num1 = random1.nextInt(matrizValores.length);
+            //Log.d(TAG, "primer random = " + num1);
+            Random random2 = new Random();
+            num2 = random2.nextInt(matrizValores[0].length);
+            //Log.d(TAG, "segundo random = " + num2);
+            //Log.d(TAG, "valor actual de casilla es=" + matrizValores[num1][num2]);
+            if (matrizValores[num1][num2] == 0) {
+                matrizValores[num1][num2] = generar2o4();
+                encontradoEspacioLibre = true;
+            }
+        } while (!encontradoEspacioLibre);
+        // pintamos todas casillas, valor y color segun valor
         repintarValoresEnCasillas();
+
+        // buscamos textView y pintamos en otro color
+        String textViewID = "tv_" + num1 + "" + num2;
+        // OJO !!! usamos getResouces().getIdentifier() !!!!!
+        int resId = getResources().getIdentifier(textViewID, "id", getPackageName());
+
+        // destacamos celda nueva pintando en otro color
+        TextView textView = findViewById(resId);
+        textView.setBackgroundResource(R.drawable.celda_2048_new);
     }
 
     /**
@@ -302,58 +308,88 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     }
 
     /**
-     * metodo nos devuelve coordenada de una casilla random
      *
-     * @return
      */
-    private int[] determinarUnNumeroRandomParaNuevaCasilla() {
-        int numerosCero = 0;
-        // creamos array para guardar dos numeros I y J
-        int[] coordenadas = new int[2];
-        // determinamos cuantas casillas vacias hay
+    public void comprobarGameOver() {
+        int num = 0;
         for (int i = 0; i < matrizValores.length; i++) {
             for (int j = 0; j < matrizValores[0].length; j++) {
-                if (matrizValores[i][j] == 0) {
-                    numerosCero++;
+                if (matrizValores[i][j] != 0) {
+                    num++;
                 }
             }
         }
-        Random random_I = new Random();
-        Random random_J = new Random();
-        int numero_en_fila_I = random_I.nextInt(numerosCero);
-        int numero_en_fila_J = random_J.nextInt(numerosCero);
-
-        // recorremos segunda vez matriz para determinar esta casilla
-        int contador = 0;
-        for (int i = 0; i < matrizValores.length; i++) {
-            for (int j = 0; j < matrizValores[0].length; j++) {
-                if (matrizValores[i][j] == 0) {
-                    contador++;
-                    if (contador == numero_en_fila_I) {
-                        coordenadas[0] = i;
-                    }
-                    if (contador == numero_en_fila_J) {
-                        coordenadas[1] = j;
-                    }
+        if (num == 16) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("perdido");
+            builder.setIcon(R.drawable.eft_250);
+            builder.setMessage("Has perdido partida");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(getApplicationContext(), MenuActivity2048.class);
+                    Activity2048.this.finish();
                 }
-            }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
-        return coordenadas;
-    } // end of determinarUnNumeroRandomParaNuevaCasilla()
-
-    /**
-     * metodo que pasa a matriz de valores nuevo numero generado
-     * indicando coordenadas de I y J
-     */
-    private void generarNuevoNumeroEnTablero() {
-        int[] arraycoordenadas = determinarUnNumeroRandomParaNuevaCasilla();
-
-        int coordenada_I = arraycoordenadas[0];
-        int coordenada_J = arraycoordenadas[1];
-        int numeroRandom = generar2o4();
-        matrizValores[coordenada_I][coordenada_J] = numeroRandom;
-
     }
+
+//    /**
+//     * AQUI ALGO FALLA ?¿
+//     * metodo nos devuelve coordenada de una casilla random
+//     *
+//     * @return
+//     */
+//    private int[] determinarUnNumeroRandomParaNuevaCasilla() {
+//        int numerosCero = 0;
+//        // creamos array para guardar dos numeros I y J
+//        int[] coordenadas = new int[2];
+//        // determinamos cuantas casillas vacias hay
+//        for (int i = 0; i < matrizValores.length; i++) {
+//            for (int j = 0; j < matrizValores[0].length; j++) {
+//                if (matrizValores[i][j] == 0) {
+//                    numerosCero++;
+//                }
+//            }
+//        }
+//        Random random_I = new Random();
+//        Random random_J = new Random();
+//        int numero_en_fila_I = random_I.nextInt(numerosCero);
+//        int numero_en_fila_J = random_J.nextInt(numerosCero);
+//
+//        // recorremos segunda vez matriz para determinar esta casilla
+//        int contador = 0;
+//        for (int i = 0; i < matrizValores.length; i++) {
+//            for (int j = 0; j < matrizValores[0].length; j++) {
+//                if (matrizValores[i][j] == 0) {
+//                    contador++;
+//                    if (contador == numero_en_fila_I) {
+//                        coordenadas[0] = i;
+//                    }
+//                    if (contador == numero_en_fila_J) {
+//                        coordenadas[1] = j;
+//                    }
+//                }
+//            }
+//        }
+//        return coordenadas;
+//    } // end of determinarUnNumeroRandomParaNuevaCasilla()
+
+//    /**
+//     * metodo que pasa a matriz de valores nuevo numero generado
+//     * indicando coordenadas de I y J
+//     */
+//    private void generarNuevoNumeroEnTablero() {
+//        int[] arraycoordenadas = determinarUnNumeroRandomParaNuevaCasilla();
+//
+//        int coordenada_I = arraycoordenadas[0];
+//        int coordenada_J = arraycoordenadas[1];
+//        int numeroRandom = generar2o4();
+//        matrizValores[coordenada_I][coordenada_J] = numeroRandom;
+//
+//    }
 
 
     /**
@@ -397,11 +433,15 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         // pasamos
         pasarDatosDeColumnasAlMatriz(columna1, columna2, columna3, columna4);
 
+        //
+        comprobarGameOver();
+
         // generamos un nuevo numero en el tablero
-        generarNuevoNumeroEnTablero();
+        //generarNuevoNumeroEnTablero();
+        crearRandom2();
 
         // pasamos datos de matriz int[][] a layout, para mostrar
-        repintarValoresEnCasillas();
+        // repintarValoresEnCasillas();
 
     }// end moverAbajoMatrizValores()
 
@@ -446,11 +486,15 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         // pasamos datos de los arrays simples a matriz
         pasarDatosDeColumnasAlMatriz(columna1, columna2, columna3, columna4);
 
+        // comprobamos si terminamos juego
+        comprobarGameOver();
+
         // nuevo random en tablero
-        generarNuevoNumeroEnTablero();
+        //generarNuevoNumeroEnTablero();
+        crearRandom2();
 
         // pasamos datos de matriz int[][] a layout, para mostrar
-        repintarValoresEnCasillas();
+        // repintarValoresEnCasillas();
 
     }// end of moverArribaMatrizValores()
 
@@ -495,11 +539,15 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         // pasamos datos de los 4 arrays simples a int[][] matrizValores
         pasarDatosDeFilasAlMatriz(fila1, fila2, fila3, fila4);
 
+        // comprobamos si podemos jugar o terminamos
+        comprobarGameOver();
+
         // generamos un nuevo numero en el tablero
-        generarNuevoNumeroEnTablero();
+        //generarNuevoNumeroEnTablero();
+        crearRandom2();
 
         // volvemos a repintar datos de matrizValores en el layout
-        repintarValoresEnCasillas();
+        // repintarValoresEnCasillas();
 
     } // end of moverIzquerdaMatrizValores()
 
@@ -546,11 +594,15 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         // pasamos datos de mos arrays simples a la matrizValores int[][]
         pasarDatosDeFilasAlMatriz(fila1, fila2, fila3, fila4);
 
+        // comprobamos si podemos jugar o terminamos
+        comprobarGameOver();
+
         // generamos un nuevo numero random en el tablero
-        generarNuevoNumeroEnTablero();
+        //generarNuevoNumeroEnTablero();
+        crearRandom2();
 
         // volvemos a repintar numeros de matrizValores en layout
-        repintarValoresEnCasillas();
+        // repintarValoresEnCasillas();
     }
 
 //    /** OBSOLETO y uso incorrecto
@@ -660,10 +712,11 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
      * 1. metodo que contiene un metodo para mover a la izquerda, intercambiar numeros con ceros
      * 2. despued suma numeros si son iguales, pero solo una vez
      * 3. y despues otra vez apliza movimiento , por si despues de sumar ha parecido mas ceros
+     *
      * @param array
      * @return
      */
-    private int[] manejarArrayIzquerda(int[] array){
+    private int[] manejarArrayIzquerda(int[] array) {
         int[] array1 = moverNumerosUnArrayIzquerda(array);
         int[] array2 = sumarNumerosIgualesIzquerda(array1);
         int[] array3 = moverNumerosUnArrayIzquerda(array2);
@@ -701,7 +754,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
      * @return devuelve array ordenado, intercambiados ceros y numeros, a la izquerda numeros
      */
     private int[] moverNumerosUnArrayIzquerda(int[] array) {
-        for (int i = array.length; i >= 0; i--) {
+        for (int i = array.length; i > 0; i--) {
             for (int j = array.length - 1; j > 0; j--) {
                 if (array[j - 1] == 0) {
                     int aux = array[j];
@@ -726,18 +779,23 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         // lo aplicamos despues para evitar que casillas sumadas vuelven a sumarse
         int numeroSumado = -1;
         //-------------------
-        for (int i = array.length - 1; i >= 0; i--) {
-            for (int j = array.length - 1; j >= 0; j--) {
-                if (j - 1 >= 0) {
-                    // comprobamos si son iguales, !y que no sea valor que acabamos de sumar ya !
-                    if ((array[j - 1] == array[j]) && (array[j - 1] != numeroSumado)) {
-                        int aux = array[j];
-                        array[j - 1] = 0;
-                        array[j] = aux * 2;
-                        numeroSumado = aux * 2;
-                    }
+        for (int i = array.length-1 ; i > 0; i--) {
+            for (int j = array.length-1 ; j > 0; j--) {
+                // comprobamos si son iguales, !y que no sea valor que acabamos de sumar ya !
+                if ((array[j] == array[j - 1]) && (array[j - 1] != numeroSumado)) {
+                    //Log.d(TAG, "-----------------------");
+                    //Log.d(TAG, "array j = "+array[j]+ "|  array j - 1 = " + array[j-1]);
+                    int aux = array[j];
+                    array[j - 1] = 0;
+                    //Log.d(TAG, " array j - 1 = " + array[j-1]);
+                    array[j] = aux * 2;
+                    //Log.d(TAG, "array j = "+array[j]);
+                    numeroSumado = aux * 2;
+                    //Log.d(TAG, "numeroSumado = "+ numeroSumado);
+                    //Log.d(TAG, "-----------------------");
                 }
             }
+
         }
         return array;
     } // end of sumarNumerosIgualesDerecha()
@@ -746,6 +804,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
      * SUMAR NUMEROS IZQUERDA
      * recibe como parametro una array de numeros y si encuentra numeros iguales los suma
      * uso, algo parecido 'metodo burbuja' , doble for para 'ordenar'
+     *
      * @param array array de 4 numeros que representan fila o columna para mover a la izquerda/ arriba
      * @return devuelve array ordenado - sumando numeros iguales
      */
@@ -754,8 +813,8 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         // lo aplicamos despues para evitar que casillas sumadas vuelven a sumarse
         int numeroSumado = -1;
         //-------------------
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length-1; j++) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = 0; j < array.length - 1; j++) {
                 if ((array[j] == array[j + 1]) && (array[j + 1] != numeroSumado)) {
                     int aux = array[j];
                     array[j] = 0;

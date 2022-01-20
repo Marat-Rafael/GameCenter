@@ -10,6 +10,7 @@
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/casilla_vacia.xml" value="0.35" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/celda.xml" value="0.3828125" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/celda_2048_0.xml" value="0.2675925925925926" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/celda_2048_new.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/destacado.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable-v24/selector_para_listView.xml" value="0.35" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/animation.xml" value="0.27291666666666664" />
@@ -36,6 +37,7 @@
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/celda_2048_512.xml" value="0.2675925925925926" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/celda_2048_64.xml" value="0.2675925925925926" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/celda_2048_8.xml" value="0.2675925925925926" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/celda_2048_new.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_2048.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/GameCenterNuevo/app/src/main/res/layout/activity_elige_juego.xml" value="0.19635416666666666" />

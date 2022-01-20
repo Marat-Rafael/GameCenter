@@ -16,7 +16,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        setTitle("Espantapajaros, Mago Oz");
+        setTitle("Espantapajaros");
 
         // detectamos layout principal
         LinearLayout linearLayout = findViewById(R.id.linear_layout_principal);
