@@ -626,7 +626,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
         menu.findItem(R.id.help_menu_item_setting_peg).setIntent(
                 new Intent(this, SettingActivityPeg.class));
         menu.findItem(R.id.help_menu_item_score_peg).setIntent(
-                new Intent(this, SettingActivityPeg.class));
+                new Intent(this, ScoresActivityPeg.class));
         return true;
     }
 

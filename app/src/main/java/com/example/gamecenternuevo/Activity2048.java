@@ -49,13 +49,6 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         constraintLayout.setOnTouchListener(this);
         soundPlayer2048 = new SoundPlayer(this);
 
-//        matrizValores = new int[][]{
-//                {2, 2, 2, 2},
-//                {2, 2, 2, 2},
-//                {2, 2, 2, 2},
-//                {2, 2, 2, 2}
-//        };
-
 
         animarBackground2048();
 
@@ -78,9 +71,11 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     }
 
     public void juego() {
-
+        // creamos matriz de valores int[][]
         crearMatrizValores();
+        // pintamos tablero con casillas segun valor de casilla
         repintarValoresEnCasillas();
+        // creamos primer numaro random
         crearRandom2();
 
     }
@@ -261,6 +256,10 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
 //        repintarValoresEnCasillas();
 //    }
 
+    /**
+     * Metodo para generar un numero 2 o 4 en una casilla random
+     * si esta casilla esta ocupado por algun numero diferente de cero volvemos a generar
+     */
     private void crearRandom2() {
         boolean encontradoEspacioLibre = false;
         int num1;
@@ -308,10 +307,11 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     }
 
     /**
-     *
+     * Comprobamos numero de casillas ocupadas
      */
     public void comprobarGameOver() {
-        int num = 0;
+        // tiene que empezar por uno, porque ya tenemos generado un numero random en el tablero
+        int num = 1;
         for (int i = 0; i < matrizValores.length; i++) {
             for (int j = 0; j < matrizValores[0].length; j++) {
                 if (matrizValores[i][j] != 0) {
@@ -319,6 +319,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                 }
             }
         }
+        Log.d(TAG, "LOG: numero de casillas con numeros es "+num);
         if (num == 16) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("perdido");
@@ -423,7 +424,6 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                 matrizValores[2][3],
                 matrizValores[3][3],
         };
-        // ----
         //  a cada array simple aplicamos metodo manejarArray();
         int[] columna1 = manejarArrayDerecha(arrayColumna1);
         int[] columna2 = manejarArrayDerecha(arrayColumna2);
@@ -605,25 +605,6 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         // repintarValoresEnCasillas();
     }
 
-//    /** OBSOLETO y uso incorrecto
-//     * INVERTIR
-//     * porque otro metodo lo deja alineado a la derecha
-//     * al invertir sera alineado a la izquerda
-//     *
-//     * @param array
-//     * @return
-//     */
-//    private int[] invertiraArray(int[] array) {
-//        int[] arrayInvertido = new int[array.length];
-//
-//        arrayInvertido[0] = array[3];
-//        arrayInvertido[1] = array[2];
-//        arrayInvertido[2] = array[1];
-//        arrayInvertido[3] = array[0];
-//
-//        return arrayInvertido;
-//    } // end invertirArray()
-
 
     /**
      * DATOS EN FILAS
@@ -635,26 +616,45 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
      * @param arrayFila3
      */
     private void pasarDatosDeFilasAlMatriz(int[] arrayFila0, int[] arrayFila1, int[] arrayFila2, int[] arrayFila3) {
-        // ---------primera fila-------
-        matrizValores[0][0] = arrayFila0[0];
-        matrizValores[0][1] = arrayFila0[1];
-        matrizValores[0][2] = arrayFila0[2];
-        matrizValores[0][3] = arrayFila0[3];
-        // ---------segunda fila-------
-        matrizValores[1][0] = arrayFila1[0];
-        matrizValores[1][1] = arrayFila1[1];
-        matrizValores[1][2] = arrayFila1[2];
-        matrizValores[1][3] = arrayFila1[3];
-        // ---------tercera fila-------
-        matrizValores[2][0] = arrayFila2[0];
-        matrizValores[2][1] = arrayFila2[1];
-        matrizValores[2][2] = arrayFila2[2];
-        matrizValores[2][3] = arrayFila2[3];
-        // ---------cuarta fila-------
-        matrizValores[3][0] = arrayFila3[0];
-        matrizValores[3][1] = arrayFila3[1];
-        matrizValores[3][2] = arrayFila3[2];
-        matrizValores[3][3] = arrayFila3[3];
+
+        for (int i = 0; i < matrizValores.length; i++) {
+            for (int j = 0; j < matrizValores[0].length; j++) {
+                if (i == 0) {
+                    matrizValores[i][j] = arrayFila0[j];
+                }
+                if (i == 1) {
+                    matrizValores[i][j] = arrayFila1[j];
+                }
+                if (i == 2) {
+                    matrizValores[i][j] = arrayFila2[j];
+                }
+                if (i == 3) {
+                    matrizValores[i][j] = arrayFila3[j];
+                }
+            }
+        }
+//
+//
+//        // ---------primera fila-------
+//        matrizValores[0][0] = arrayFila0[0];
+//        matrizValores[0][1] = arrayFila0[1];
+//        matrizValores[0][2] = arrayFila0[2];
+//        matrizValores[0][3] = arrayFila0[3];
+//        // ---------segunda fila-------
+//        matrizValores[1][0] = arrayFila1[0];
+//        matrizValores[1][1] = arrayFila1[1];
+//        matrizValores[1][2] = arrayFila1[2];
+//        matrizValores[1][3] = arrayFila1[3];
+//        // ---------tercera fila-------
+//        matrizValores[2][0] = arrayFila2[0];
+//        matrizValores[2][1] = arrayFila2[1];
+//        matrizValores[2][2] = arrayFila2[2];
+//        matrizValores[2][3] = arrayFila2[3];
+//        // ---------cuarta fila-------
+//        matrizValores[3][0] = arrayFila3[0];
+//        matrizValores[3][1] = arrayFila3[1];
+//        matrizValores[3][2] = arrayFila3[2];
+//        matrizValores[3][3] = arrayFila3[3];
 
     } // end of pasarDatosDeFilasAlMatriz
 
@@ -668,26 +668,44 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
      * @param arrayColumna3
      */
     private void pasarDatosDeColumnasAlMatriz(int[] arrayColumna0, int[] arrayColumna1, int[] arrayColumna2, int[] arrayColumna3) {
-        // ---------primera columna-------
-        matrizValores[0][0] = arrayColumna0[0];
-        matrizValores[1][0] = arrayColumna0[1];
-        matrizValores[2][0] = arrayColumna0[2];
-        matrizValores[3][0] = arrayColumna0[3];
-        // ---------segunda columna-------
-        matrizValores[0][1] = arrayColumna1[0];
-        matrizValores[1][1] = arrayColumna1[1];
-        matrizValores[2][1] = arrayColumna1[2];
-        matrizValores[3][1] = arrayColumna1[3];
-        // ---------tercera columna-------
-        matrizValores[0][2] = arrayColumna2[0];
-        matrizValores[1][2] = arrayColumna2[1];
-        matrizValores[2][2] = arrayColumna2[2];
-        matrizValores[3][2] = arrayColumna2[3];
-        // ---------cuarta columna-------
-        matrizValores[0][3] = arrayColumna3[0];
-        matrizValores[1][3] = arrayColumna3[1];
-        matrizValores[2][3] = arrayColumna3[2];
-        matrizValores[3][3] = arrayColumna3[3];
+
+        for (int i = 0; i < matrizValores.length; i++) {
+            for (int j = 0; j < matrizValores[0].length; j++) {
+                if (j == 0) {
+                    matrizValores[i][j] = arrayColumna0[i];
+                }
+                if (j == 1) {
+                    matrizValores[i][j] = arrayColumna1[i];
+                }
+                if (j == 2) {
+                    matrizValores[i][j] = arrayColumna2[i];
+                }
+                if (j == 3) {
+                    matrizValores[i][j] = arrayColumna3[i];
+                }
+            }
+        }
+//
+//        // ---------primera columna-------
+//        matrizValores[0][0] = arrayColumna0[0];
+//        matrizValores[1][0] = arrayColumna0[1];
+//        matrizValores[2][0] = arrayColumna0[2];
+//        matrizValores[3][0] = arrayColumna0[3];
+//        // ---------segunda columna-------
+//        matrizValores[0][1] = arrayColumna1[0];
+//        matrizValores[1][1] = arrayColumna1[1];
+//        matrizValores[2][1] = arrayColumna1[2];
+//        matrizValores[3][1] = arrayColumna1[3];
+//        // ---------tercera columna-------
+//        matrizValores[0][2] = arrayColumna2[0];
+//        matrizValores[1][2] = arrayColumna2[1];
+//        matrizValores[2][2] = arrayColumna2[2];
+//        matrizValores[3][2] = arrayColumna2[3];
+//        // ---------cuarta columna-------
+//        matrizValores[0][3] = arrayColumna3[0];
+//        matrizValores[1][3] = arrayColumna3[1];
+//        matrizValores[2][3] = arrayColumna3[2];
+//        matrizValores[3][3] = arrayColumna3[3];
     }// end pasarDatosDeColumnaAlMatriz
 
     /**
@@ -779,8 +797,8 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         // lo aplicamos despues para evitar que casillas sumadas vuelven a sumarse
         int numeroSumado = -1;
         //-------------------
-        for (int i = array.length-1 ; i > 0; i--) {
-            for (int j = array.length-1 ; j > 0; j--) {
+        for (int i = array.length - 1; i > 0; i--) {
+            for (int j = array.length - 1; j > 0; j--) {
                 // comprobamos si son iguales, !y que no sea valor que acabamos de sumar ya !
                 if ((array[j] == array[j - 1]) && (array[j - 1] != numeroSumado)) {
                     //Log.d(TAG, "-----------------------");
@@ -844,7 +862,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         menu.findItem(R.id.help_menu_item_setting_2048).setIntent(
                 new Intent(this, SettingActivity2048.class));
         menu.findItem(R.id.help_menu_item_score_2048).setIntent(
-                new Intent(this, SettingActivity2048.class));
+                new Intent(this, ScoresActivity2048.class));
 
         return true;
     }
