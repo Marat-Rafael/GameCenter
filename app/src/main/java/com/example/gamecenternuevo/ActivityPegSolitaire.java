@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -334,7 +335,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             v.setBackgroundResource(R.drawable.casilla_selecionada);
-                            soundPlayerPeg.playRecoil();
+                            soundPlayerPeg.playZvuk1();
                             detectarCasillaSelecionada();
                             // resto convertimos en casillas rellenas
                             for (int i = 0; i < matrixTextView.length; i++) {
@@ -461,7 +462,6 @@ public class ActivityPegSolitaire extends AppCompatActivity {
      */
     private void realizarSalto() {
         // animacion para borrar celda
-;
 
         Log.d(TAG, "entramos realizar salto");
         for (int i = 0; i < matrixTextView.length; i++) {
@@ -477,7 +477,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i + 1][j]);
                             convertirCasilla_A_Rellena(matrixTextView[i + 2][j]);
-                            soundPlayerPeg.playShoot();
+                            soundPlayerPeg.playZvuk2();
                         }
                     }
                     // destino i - 2
@@ -489,7 +489,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i - 1][j]);
                             convertirCasilla_A_Rellena(matrixTextView[i - 2][j]);
-                            soundPlayerPeg.playShoot();
+                            soundPlayerPeg.playZvuk2();
                         }
                     }
                     // si j + 2
@@ -501,7 +501,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i][j + 1]);
                             convertirCasilla_A_Rellena(matrixTextView[i][j + 2]);
-                            soundPlayerPeg.playShoot();
+                            soundPlayerPeg.playZvuk2();
                         }
                     }
                     // si j - 2
@@ -513,7 +513,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
                             convertirCasilla_A_Vacia(matrixTextView[i][j]);
                             convertirCasilla_A_Vacia(matrixTextView[i][j - 1]);
                             convertirCasilla_A_Rellena(matrixTextView[i][j - 2]);
-                            soundPlayerPeg.playShoot();
+                            soundPlayerPeg.playZvuk2();
                         }
                     }
                 }

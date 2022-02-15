@@ -8,6 +8,7 @@
     android:gravity="center_horizontal"
     android:shadowDy="15"
     android:shadowRadius="15"
+    android:padding="15dp"
     android:textColor="@color/menu_color"
     android:textSize="@dimen/menu_item_size" />
 

@@ -27,7 +27,8 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     // implementando interfaz OnTouchListener nos obliga sobreescribir onTouch metod
     // implementando interfaz GestureDetector nos obliga sobreescribir sus metodos
 
-
+    private TextView TextViewpuntuacion;
+    private int puntuacion ;
     final String TAG = "juego";
     TextView auxTextView;
     private boolean gameOver = false;
@@ -135,6 +136,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
      */
     @Override
     public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+
         // calculamos ancho del gesto
         // en eje X , desde punto final restamos punto de inicio
         float ancho = Math.abs(motionEvent1.getX() - motionEvent.getX());
@@ -149,13 +151,16 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
             if (motionEvent1.getX() > motionEvent.getX()) {
                 // si EJE X punto final es mas grande que punto inicial consideramos que es  movimiento a la derecha
                 moverDerechaMatrizValores();
-                soundPlayer2048.playRifle();
+                //soundPlayer2048.playRifle();
+                soundPlayer2048.playSbor();
+
                 Log.d(TAG, "onFling a derecha");
 
                 // si punto final es menor en eje X , es movimiento Izquerdo
             } else if (motionEvent1.getX() < motionEvent.getX()) {
                 moverIzquerdaMatrizValores();
-                soundPlayer2048.playRifle();
+                //soundPlayer2048.playRifle();
+                soundPlayer2048.playSbor();
                 Log.d(TAG, " onFling a izquerda");
 
             }
@@ -164,16 +169,19 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
             // si
             if (motionEvent1.getY() > motionEvent.getY()) {
                 Log.d(TAG, "onFling abajo");
-                soundPlayer2048.playRifle();
+                //soundPlayer2048.playRifle();
+                soundPlayer2048.playSbor();
                 moverAbajoMatrizValores();
 
 
             } else if (motionEvent1.getY() < motionEvent.getY()) {
                 Log.d(TAG, "onFling arriba");
-                soundPlayer2048.playRifle();
+                //soundPlayer2048.playRifle();
+                soundPlayer2048.playSbor();
                 moverArribaMatrizValores();
             }
         }
+
         return false;
     }
 
@@ -235,6 +243,9 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                 } else {
                     auxTextView.setBackground(getResources().getDrawable(R.drawable.celda_2048_2048, null));
                 }
+                TextViewpuntuacion = findViewById(R.id.tv_puntuacion_2048_campoNumero);
+                TextViewpuntuacion.setText(""+puntuacion);
+
             }
         }
     }
@@ -319,6 +330,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                 }
             }
         }
+
         Log.d(TAG, "LOG: numero de casillas con numeros es "+num);
         if (num == 16) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -335,6 +347,19 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+    }
+
+
+    private void comprobarSiHayMovimientosDisponibles(){
+        boolean hay = true;
+        for (int i = 0; i < matrizValores.length; i++) {
+            for (int j = 0; j < matrizValores[0].length; j++) {
+                if(matrizValores[i][j] == matrizValores[i + 1][j]){
+
+                }
+            }
+        }
+
     }
 
 //    /**
@@ -811,9 +836,9 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                     numeroSumado = aux * 2;
                     //Log.d(TAG, "numeroSumado = "+ numeroSumado);
                     //Log.d(TAG, "-----------------------");
+                    puntuacion = puntuacion+ numeroSumado;
                 }
             }
-
         }
         return array;
     } // end of sumarNumerosIgualesDerecha()
@@ -838,6 +863,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                     array[j] = 0;
                     array[j + 1] = aux * 2;
                     numeroSumado = aux * 2;
+                    puntuacion = puntuacion+numeroSumado;
                 }
             }
         }
@@ -866,6 +892,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
 
         return true;
     }
+
 } // -- fin main
 
 

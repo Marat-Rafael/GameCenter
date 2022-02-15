@@ -22,12 +22,12 @@
         Las baldosas con numeración alta emiten un brillo suave.
         Después de realizar una jugada, aparecerá una baldosa nueva en un lugar vacío del tablero,
         la cual tendrá o bien el número 2 o el número 4
-        <br/>
+        <br />
         El juego registra el puntaje del usuario con un marcador en el margen superior derecho.
         El puntaje comienza en cero y, cuando dos baldosas se combinan,
         este se incrementa por el valor de la baldosa resultante.
         Al lado del puntaje actual, se muestra el mejor puntaje del usuario, al estilo de los juegos de Arcade.
-        <br/>
+        <br />
         2048 acaba en victoria cuando se logra obtener la baldosa con el número 2048
         (de allí el nombre del juego).
         Tras haber logrado esto, es posible seguir jugando en un modo sandbox,
@@ -42,7 +42,7 @@
         y en inglés como Peg Solitaire es un juego de tablero solitario abstracto de origen francés
         Originalmente era llamado "un soldado" o "uno solo", pero comenzó a tener popularidad a partir de este nombre.
     Se juega con un tablero con diferentes formas según el modelo o el lugar de origen.
-        Al inicio del juego están todos los espacios ocupados, excepto por uno.<br/>
+        Al inicio del juego están todos los espacios ocupados, excepto por uno.<br />
           El jugador debe mover una pieza por vez. Las piezas solo pueden moverse capturando mediante un "salto" sobre otra,
         como en las damas. Solo se puede capturar en horizontal o en vertical, nunca en diagonal.
         Así, al principio, solo pocas tienen posibilidad de moverse, capturando una.

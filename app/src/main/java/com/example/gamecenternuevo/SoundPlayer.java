@@ -15,6 +15,9 @@ public class SoundPlayer {
     private static int type;
     private static int imperialSong;
     private static int rifle;
+    private static int sbor;
+    private static int zvuk1;
+    private static int zvuk2;
 
         // --- soundPool is Depricated in api 21 (lolipop
         // -----opcional
@@ -48,6 +51,10 @@ public class SoundPlayer {
         type = soundPool.load(context,R.raw.single_key_type,1);
         imperialSong = soundPool.load(context,R.raw.imperial,1);
         rifle = soundPool.load(context,R.raw.rifle,1);
+        sbor = soundPool.load(context,R.raw.sbor,1);
+        zvuk1 = soundPool.load(context,R.raw.zvuk1,1);
+        zvuk2 = soundPool.load(context,R.raw.zvuk2,1);
+
     }
 
     // ------------------------------- METODOS -----------------------------------------------------
@@ -74,5 +81,17 @@ public class SoundPlayer {
     public void playRifle(){
         // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
         soundPool.play(rifle,1.0f,1.0f,1,0,1.0f);
+    }
+    public void playSbor(){
+        // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
+        soundPool.play(sbor,1.0f,1.0f,1,0,1.0f);
+    }
+    public void playZvuk1(){
+        // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
+        soundPool.play(zvuk1,1.0f,1.0f,1,0,1.0f);
+    }
+    public void playZvuk2(){
+        // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
+        soundPool.play(zvuk2,1.0f,1.0f,1,0,1.0f);
     }
 }

@@ -3,37 +3,40 @@
     package="com.example.gamecenternuevo">
 
     <application
-        android:fullBackupOnly="true"
         android:allowBackup="true"
+        android:fullBackupOnly="true"
         android:icon="@mipmap/eft_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/eft_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameCenterNuevo">
         <activity
-            android:name=".ScoresActivity2048"
-            android:parentActivityName=".MenuActivity2048"
+            android:name=".LoginActivity"
             android:exported="false" />
+        <activity
+            android:name=".ScoresActivity2048"
+            android:exported="false"
+            android:parentActivityName=".MenuActivity2048" />
         <activity
             android:name=".ScoresActivityPeg"
-            android:parentActivityName=".MenuActivityPegSolitaire"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MenuActivityPegSolitaire" />
         <activity
             android:name=".SettingActivityPeg"
-            android:parentActivityName=".MenuActivityPegSolitaire"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MenuActivityPegSolitaire" />
         <activity
             android:name=".HelpActivityPeg"
-            android:parentActivityName=".MenuActivityPegSolitaire"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MenuActivityPegSolitaire" />
         <activity
             android:name=".SettingActivity2048"
-            android:parentActivityName=".MenuActivity2048"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MenuActivity2048" />
         <activity
             android:name=".HelpActivity2048"
-            android:parentActivityName=".MenuActivity2048"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MenuActivity2048" />
         <activity
             android:name=".MenuActivityPegSolitaire"
             android:exported="false"

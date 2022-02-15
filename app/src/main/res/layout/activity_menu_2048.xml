@@ -21,7 +21,7 @@
             android:layout_height="75dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ak_74" />
+            android:src="@drawable/star_50" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,7 +35,8 @@
             android:shadowRadius="5"
             android:text="@string/menu2048"
             android:textColor="@color/menu_color"
-            android:textSize="@dimen/menu_item_size" />
+            android:textSize="40dp"
+            android:textStyle="bold"/>
 
         <ImageView
             android:layout_marginRight="25dp"
@@ -43,7 +44,7 @@
             android:layout_height="75dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ak_74_rev" />
+            android:src="@drawable/star_50" />
 
     </RelativeLayout>
 
@@ -59,7 +60,7 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="109dp"
-        android:divider="@drawable/bullet2_50_rev" />
+        android:divider="?android:listDivider" />
 
     <ImageView
         android:id="@+id/img_menu_bottom"
@@ -67,7 +68,7 @@
         android:layout_height="175dp"
         android:layout_alignParentBottom="true"
         android:scaleType="centerInside"
-        android:src="@drawable/eft_250" />
+         />
 
 
 </RelativeLayout>
