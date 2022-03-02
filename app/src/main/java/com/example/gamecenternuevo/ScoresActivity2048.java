@@ -3,10 +3,16 @@ package com.example.gamecenternuevo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class ScoresActivity2048 extends AppCompatActivity {
+
+    SQLiteDatabase db;
+    UsuariosHelper helper;
+    TextView textViewTodasPuntuacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +20,13 @@ public class ScoresActivity2048 extends AppCompatActivity {
         setContentView(R.layout.activity_scores2048);
         setTitle("Score 2048");
 
+        textViewTodasPuntuacion = findViewById(R.id.scores_layout_2048_resultados);
+        helper = new UsuariosHelper(this);
         animarBackgroundScore2048();
+        db = helper.getReadableDatabase();
+
+
+        helper.mostrarTodosUsuariosConPuntuacion(textViewTodasPuntuacion,db);
 
     }
 
@@ -30,4 +42,5 @@ public class ScoresActivity2048 extends AppCompatActivity {
         animationDrawable.start();
         //-------------------------------fin animacion----------------------------------------------
     }
+
 }

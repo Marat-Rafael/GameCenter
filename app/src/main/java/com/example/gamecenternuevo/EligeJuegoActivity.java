@@ -17,6 +17,7 @@ public class EligeJuegoActivity extends AppCompatActivity {
 
     ListView menuListEligeJuego;
     String [] juegos;
+    TextView textViewUsuarioActial;
 
     private static SoundPlayer soundPlayer ;
 
@@ -25,6 +26,13 @@ public class EligeJuegoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elige_juego);
         setTitle("Elige Juego");
+
+        // identificamos campo donde mostrar usuario
+        textViewUsuarioActial = findViewById(R.id.elige_juego_activity_usuario_actual);
+
+        // recuperamos datos del intent
+        String usuarioActual = getIntent().getStringExtra("USUARIO");
+        textViewUsuarioActial.setText(usuarioActual);
 
         soundPlayer = new SoundPlayer(this);
 
@@ -61,12 +69,18 @@ public class EligeJuegoActivity extends AppCompatActivity {
                     case "2048":
                         // mostrarToast("2048");
                         // abrimos actividad del menu para juego 2048
-                        startActivity(new Intent(getApplicationContext(), MenuActivity2048.class));
+                        Intent intent2048 = new Intent(getApplicationContext(), MenuActivity2048.class);
+                        // pasamos datos del usuario actual
+                        intent2048.putExtra("USUARIO",textViewUsuarioActial.getText().toString());
+                        startActivity(intent2048);
                         break;
                     case "PEG":
                         // mostrarToast("PEG");
                         // abrimos actividad PegSolitaire
-                        startActivity(new Intent(getApplicationContext(), com.example.gamecenternuevo.MenuActivityPegSolitaire.class));
+                        Intent intentPeg = new Intent(getApplicationContext(), MenuActivityPegSolitaire.class);
+                        // pasamos datos del usuario actual
+                        intentPeg.putExtra("USUARIO",textViewUsuarioActial.getText().toString());
+                        startActivity(intentPeg);
                         break;
                     default:
                         mostrarToast("error");

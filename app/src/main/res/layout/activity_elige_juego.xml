@@ -8,6 +8,18 @@
     android:background="@drawable/gradient_list"
     tools:context=".EligeJuegoActivity">
 
+    <TextView
+        android:id="@+id/elige_juego_activity_usuario_actual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:textColor="@color/black"
+        android:layout_margin="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/listView_elige_juego"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ListView
         android:id="@+id/listView_elige_juego"
         android:layout_width="300dp"

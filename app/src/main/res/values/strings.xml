@@ -47,5 +47,6 @@
         como en las damas. Solo se puede capturar en horizontal o en vertical, nunca en diagonal.
         Así, al principio, solo pocas tienen posibilidad de moverse, capturando una.
         El objetivo del juego es eliminar todas las piezas, dejando solo una en el tablero.</string>
+    <string name="scores_2048">SCORES 2048</string>
 
 </resources>

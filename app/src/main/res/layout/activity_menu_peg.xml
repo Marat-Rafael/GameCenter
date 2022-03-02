@@ -23,7 +23,9 @@
             android:layout_centerVertical="true"
             android:src="@drawable/star_50" />
 
+
         <TextView
+            android:id="@+id/_peg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -37,6 +39,16 @@
             android:textColor="@color/menu_color"
             android:textStyle="bold"
             android:textSize="40dp" />
+
+        <TextView
+            android:id="@+id/usuarioActual"
+            android:text="usuario"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:layout_below="@+id/_peg"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"/>
 
         <ImageView
             android:layout_marginRight="25dp"

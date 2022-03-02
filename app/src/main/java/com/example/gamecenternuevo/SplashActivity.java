@@ -86,7 +86,11 @@ public class SplashActivity extends AppCompatActivity {
              */
             @Override
             public void onAnimationEnd(Animation animation) {
-                startActivity(new Intent(SplashActivity.this, EligeJuegoActivity.class));
+//                startActivity(new Intent(SplashActivity.this, EligeJuegoActivity.class));
+//                // cerramos splash activity, NO podemos volver a este activity
+//                SplashActivity.this.finish();
+
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 // cerramos splash activity, NO podemos volver a este activity
                 SplashActivity.this.finish();
             }

@@ -8,6 +8,8 @@
     android:background="@drawable/gradient_list"
     tools:context=".MenuActivity2048">
 
+
+
     <RelativeLayout
         android:id="@+id/layout_control"
         android:layout_width="match_parent"
@@ -24,6 +26,7 @@
             android:src="@drawable/star_50" />
 
         <TextView
+            android:id="@+id/_2048"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -37,6 +40,16 @@
             android:textColor="@color/menu_color"
             android:textSize="40dp"
             android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/menu_activity_2048_usuarioActual"
+            android:text="usuario"
+            android:textSize="25dp"
+            android:textColor="@color/menu_color"
+            android:layout_below="@+id/_2048"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"/>
 
         <ImageView
             android:layout_marginRight="25dp"

@@ -18,6 +18,7 @@ public class SoundPlayer {
     private static int sbor;
     private static int zvuk1;
     private static int zvuk2;
+    private static int musica;
 
         // --- soundPool is Depricated in api 21 (lolipop
         // -----opcional
@@ -54,6 +55,7 @@ public class SoundPlayer {
         sbor = soundPool.load(context,R.raw.sbor,1);
         zvuk1 = soundPool.load(context,R.raw.zvuk1,1);
         zvuk2 = soundPool.load(context,R.raw.zvuk2,1);
+        musica = soundPool.load(context,R.raw.max_payne,1);
 
     }
 
@@ -93,5 +95,10 @@ public class SoundPlayer {
     public void playZvuk2(){
         // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
         soundPool.play(zvuk2,1.0f,1.0f,1,0,1.0f);
+    }
+    // musica
+    public void playMusica(){
+        // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
+        soundPool.play(musica,1.0f,1.0f,1,-1,1.0f);
     }
 }

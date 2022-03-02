@@ -2,6 +2,7 @@ package com.example.gamecenternuevo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +29,9 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     // implementando interfaz GestureDetector nos obliga sobreescribir sus metodos
 
     private TextView TextViewpuntuacion;
-    private int puntuacion ;
+    private int puntuacionJuegoActual;
+    private int puntuacionMaxima;
+    String usuarioActual;
     final String TAG = "juego";
     TextView auxTextView;
     private boolean gameOver = false;
@@ -36,6 +39,11 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     int[][] matrizValores;
     private ConstraintLayout constraintLayout;
     private static SoundPlayer soundPlayer2048;
+    TextView textView_usuarioActual;
+    TextView textView_puntuacionMax;
+    UsuariosHelper helper;
+    SQLiteDatabase db;
+
 
 
     @Override
@@ -50,6 +58,21 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
         constraintLayout.setOnTouchListener(this);
         soundPlayer2048 = new SoundPlayer(this);
 
+        textView_usuarioActual = findViewById(R.id.actividad_2048_usuarioActual);
+        textView_puntuacionMax = findViewById(R.id.actividad_2048_max_puntuacion);
+
+        // cojemos datos del usuario actual
+        usuarioActual = getIntent().getStringExtra("USUARIO");
+        helper = new UsuariosHelper(this);
+        db = helper.getReadableDatabase();
+
+        // sacamos campo puntuacion maxima de BBDD
+        puntuacionMaxima = helper.buscarPuntuacionMax2048(db);
+
+
+        // insertamos valores del usuario actual y puntuacion maxima en textView
+        textView_usuarioActual.setText(usuarioActual);
+        textView_puntuacionMax.setText("Puntuacion Maxima: "+ puntuacionMaxima);
 
         animarBackground2048();
 
@@ -72,6 +95,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     }
 
     public void juego() {
+
         // creamos matriz de valores int[][]
         crearMatrizValores();
         // pintamos tablero con casillas segun valor de casilla
@@ -244,28 +268,13 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                     auxTextView.setBackground(getResources().getDrawable(R.drawable.celda_2048_2048, null));
                 }
                 TextViewpuntuacion = findViewById(R.id.tv_puntuacion_2048_campoNumero);
-                TextViewpuntuacion.setText(""+puntuacion);
+                TextViewpuntuacion.setText(""+ puntuacionJuegoActual);
 
             }
         }
     }
 
 
-//    /**
-//     * OBSOLETO
-//     * creamos 2 numeros random
-//     * para coordenada de una casilla random
-//     */
-//    public void crearRandom() {
-//        Random random1 = new Random();
-//        int num1 = random1.nextInt(matrizValores.length);
-//        Log.d(TAG, "primer random = " + num1);
-//        Random random2 = new Random();
-//        int num2 = random2.nextInt(matrizValores[0].length);
-//        Log.d(TAG, "segundo random = " + num2);
-//        matrizValores[num1][num2] = 2;
-//        repintarValoresEnCasillas();
-//    }
 
     /**
      * Metodo para generar un numero 2 o 4 en una casilla random
@@ -341,6 +350,8 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     Intent intent = new Intent(getApplicationContext(), MenuActivity2048.class);
+                    //
+
                     Activity2048.this.finish();
                 }
             });
@@ -836,7 +847,19 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                     numeroSumado = aux * 2;
                     //Log.d(TAG, "numeroSumado = "+ numeroSumado);
                     //Log.d(TAG, "-----------------------");
-                    puntuacion = puntuacion+ numeroSumado;
+                    puntuacionJuegoActual = puntuacionJuegoActual + numeroSumado;
+
+                    // comprobamos si superamos puntuacion maxima del juego
+                    if(puntuacionJuegoActual > puntuacionMaxima){
+                        Log.d(TAG," entramos if puntuacion actual supera la del BBDD");
+                        // aqui guardamos puntuacion ??
+                        helper.modificarPuntuacionDelUsuario2048(usuarioActual,db, puntuacionJuegoActual);
+
+                        int puntuacionActualizada = helper.buscarPuntuacionMax2048(db);
+
+                        textView_puntuacionMax.setText("Puntuacion Maxima: "+puntuacionActualizada);
+
+                    }
                 }
             }
         }
@@ -863,7 +886,18 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                     array[j] = 0;
                     array[j + 1] = aux * 2;
                     numeroSumado = aux * 2;
-                    puntuacion = puntuacion+numeroSumado;
+                    puntuacionJuegoActual = puntuacionJuegoActual +numeroSumado;
+
+                     // comprobamos si superamos puntuacion maxima del juego
+                    if(puntuacionJuegoActual > puntuacionMaxima){
+                        Log.d(TAG," entramos if puntuacion actual supera la del BBDD");
+                        // aqui guardamos puntuacion ??
+                        helper.modificarPuntuacionDelUsuario2048(usuarioActual,db, puntuacionJuegoActual);
+
+                        int puntuacionActualizada = helper.buscarPuntuacionMax2048(db);
+
+                        textView_puntuacionMax.setText("Puntuacion Maxima: "+puntuacionActualizada);
+                    }
                 }
             }
         }

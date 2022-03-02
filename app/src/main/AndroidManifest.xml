@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameCenterNuevo">
         <activity
+            android:name=".NuevoUsuarioActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
@@ -47,12 +50,10 @@
             android:parentActivityName=".EligeJuegoActivity" />
         <activity
             android:name=".Activity2048"
-            android:exported="false"
-            android:parentActivityName=".MenuActivity2048" />
+            android:exported="false" />
         <activity
             android:name=".ActivityPegSolitaire"
-            android:exported="false"
-            android:parentActivityName=".MenuActivityPegSolitaire" />
+            android:exported="false" />
         <activity
             android:name=".EligeJuegoActivity"
             android:exported="false" />

@@ -119,6 +119,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
      */
     public void llenarMatrix() {
         Log.d(TAG, "entra llenar matriz");
+
         for (int i = 0; i < matrixTextView.length; i++) {
             for (int j = 0; j < matrixTextView[0].length; j++) {
                 // cambiarBackground(matrixTextView[i][j], R.drawable.casilla_rellena);
@@ -186,7 +187,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
         Log.d(TAG, "entra buscar todas casillas jugables  --- V2 ---");
         for (int i = 0; i < matrixTextView.length; i++) {
             for (int j = 0; j < matrixTextView[0].length; j++) {
-                // buscamos casilla vacia
+                // buscamos casilla vacia, OJO ! hay que usar getConstantState()  si no no funciona
                 if (matrixTextView[i][j].getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.casilla_vacia, null).getConstantState())) {
                     // I+2
                     // comprobamos que i + 2 no sale fuera de la matriz y es casilla activa
@@ -323,7 +324,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
      * Metodo para recorrer matriz y
      * 1 - colocar a Todas casillas que puenen ser jugadas Listener
      * 2 - y convertimos casilla pulsada a casilla selecionada
-     * 3 - se activa sonido recarga de arma
+     * 3 - se activa sonido
      * 4 - llamamos metodo 'detectarCasillaSelecionada'
      * 5 - y convertimos resto de botones jugables a rellenas
      */
@@ -456,7 +457,7 @@ public class ActivityPegSolitaire extends AppCompatActivity {
      * 1 - casilla selecionada se convierte a vacia
      * 2 - casilla target se convierta a rellena
      * 3 - casilla entre estas dos se convierte en vacia en vacia
-     * 4 - se pronuncia sonido del disparo
+     * 4 - se pronuncia sonido
      * 5 - eliminamos todos Listener posibles
      * 6 - llamamos al metodo 'volverBuscarDetectarSaltar()'
      */
@@ -464,12 +465,15 @@ public class ActivityPegSolitaire extends AppCompatActivity {
         // animacion para borrar celda
 
         Log.d(TAG, "entramos realizar salto");
+        // recorremos matriz
         for (int i = 0; i < matrixTextView.length; i++) {
             for (int j = 0; j < matrixTextView[0].length; j++) {
+                // cuando encontramos casilla que esta selecionada llamamos metodo que compara dos celdas
                 if (esCasillaBuscada(matrixTextView[i][j], R.drawable.casilla_selecionada)) {
                     Log.d(TAG, "salto origen: i=" + i + " | j=" + j);
-                    // i + 2
+                    // i + 2 , aseguramos que i + 2 no sobrepasa array
                     if ((i + 2 < matrixTextView.length)) {
+                        // otra vez comparamos
                         if (esCasillaBuscada(matrixTextView[i + 2][j], R.drawable.target74)) {
                             Log.d(TAG, "destino i=" + (i + 2) + " | j=" + j);
                             // animacion falla

@@ -18,6 +18,7 @@ public class MenuActivity2048 extends AppCompatActivity {
 
     String[] items;
     ListView menuList;
+    TextView usuarioActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,10 @@ public class MenuActivity2048 extends AppCompatActivity {
 
         // identificamos ListView
         menuList = (ListView) findViewById(R.id.ListView_Menu_2048);
+        usuarioActual = findViewById(R.id.menu_activity_2048_usuarioActual);
+
+        String usuario = getIntent().getExtras().getString("USUARIO");
+        usuarioActual.setText(usuario);
 
         // creamos array de strings
         items = new String[]{
@@ -53,24 +58,33 @@ public class MenuActivity2048 extends AppCompatActivity {
                     case "Play Game":
                         // mostrarToast("juego");
                         // abrimos actividad juego 2048
-                        startActivity(new Intent(getApplicationContext(), com.example.gamecenternuevo.Activity2048.class));
+                        Intent intentPlay = new Intent(getApplicationContext(), Activity2048.class);
+                        // pasamos datos del usuario actual
+                        intentPlay.putExtra("USUARIO",usuario);
+                        startActivity(intentPlay);
                         break;
 
                     case "View Scores":
-                        startActivity(new Intent(getApplicationContext(), ScoresActivity2048.class));
+                        Intent intentScore = new Intent(getApplicationContext(), ScoresActivity2048.class);
+                        // pasamos datos del usuario actual
+                        intentScore.putExtra("USUARIO",usuario);
+                        startActivity(intentScore);
                         // mostrarToast("puntuacion");
                         break;
 
                     case "Help":
-                        startActivity(new Intent(getApplicationContext(), HelpActivity2048.class));
+                        Intent intentHelp = new Intent(getApplicationContext(), HelpActivity2048.class);
+                        intentHelp.putExtra("USUARIO",usuario);
+                        startActivity(intentHelp);
                         // mostrarToast("ayuda");
                         break;
 
                     case "Setting":
-                        startActivity(new Intent(getApplicationContext(), SettingActivity2048.class));
+                        Intent intentSetting = new Intent(getApplicationContext(), SettingActivity2048.class);
+                        intentSetting.putExtra("USUARIO",usuario);
+                        startActivity(intentSetting);
                         // mostrarToast("configuracion");
                         break;
-
                     default:
                         break;
                 }
