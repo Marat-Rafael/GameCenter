@@ -6,9 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.Nullable;
 
@@ -42,7 +41,7 @@ public class UsuariosHelper extends SQLiteOpenHelper {
     //private static final String[] COLUMNAS = {COLUMNA_ID, COLUMNA_USUARIO, COLUMNA_CONTRASENIA, COLUMNA_PUNTUACION_2048, COLUMNA_PUNTUACION_PEG};
 
     // ARRAYLIST DE USUARIOS INICIALES
-    private ArrayList<Usuario> listaUsuariosIniciales = new ArrayList<>();
+    private final ArrayList<Usuario> listaUsuariosIniciales = new ArrayList<>();
 
     // COMANDO PARA CREAR TABLA
     private static final String SQL_CREATE_ENTRIES =
@@ -74,7 +73,7 @@ public class UsuariosHelper extends SQLiteOpenHelper {
     /**
      * Metodo para crear una BBDD
      *
-     * @param sqLiteDatabase
+     * @param sqLiteDatabase DDBB
      */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -85,7 +84,7 @@ public class UsuariosHelper extends SQLiteOpenHelper {
     /**
      * Metodo para introducir datos basicos a la base de datos
      *
-     * @param sqLiteDatabase
+     * @param sqLiteDatabase DDBB
      */
     private void llenarDatabaseConDatosIniciales(SQLiteDatabase sqLiteDatabase) {
         Log.d(TAG, "entramos llenar datos iniciales");
@@ -102,8 +101,8 @@ public class UsuariosHelper extends SQLiteOpenHelper {
             values.put(COLUMNA_USUARIO, listaUsuariosIniciales.get(i).getNombre());
             values.put(COLUMNA_CONTRASENIA, listaUsuariosIniciales.get(i).getPassword());
             //values.put(COLUMNA_PUNTUACION_2048, listaUsuariosIniciales.get(i).getPuntuacion_2048());
-            values.put(String.valueOf(COLUMNA_PUNTUACION_2048), listaUsuariosIniciales.get(i).getPuntuacion_2048());
-            values.put(String.valueOf(COLUMNA_PUNTUACION_PEG), listaUsuariosIniciales.get(i).getPuntuacion_peg());
+            values.put(COLUMNA_PUNTUACION_2048, listaUsuariosIniciales.get(i).getPuntuacion_2048());
+            values.put(COLUMNA_PUNTUACION_PEG, listaUsuariosIniciales.get(i).getPuntuacion_peg());
             sqLiteDatabase.insert(TABLE_NAME, null, values);
             Log.d(TAG, " usuarios iniciales: Nombre" + listaUsuariosIniciales.get(i).getNombre() +
                     " | Contraseña: " + listaUsuariosIniciales.get(i).getPassword() +
@@ -116,7 +115,7 @@ public class UsuariosHelper extends SQLiteOpenHelper {
     /**
      * Metodo para actualizar BBDD
      *
-     * @param sqLiteDatabase
+     * @param sqLiteDatabase DDBB
      */
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
@@ -138,8 +137,8 @@ public class UsuariosHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMNA_USUARIO, usuario);
         values.put(COLUMNA_CONTRASENIA, contasenia);
-        values.put(String.valueOf(COLUMNA_PUNTUACION_2048), 0);
-        values.put(String.valueOf(COLUMNA_PUNTUACION_PEG), 0);
+        values.put(COLUMNA_PUNTUACION_2048, 0);
+        values.put(COLUMNA_PUNTUACION_PEG, 0);
         // usamos try-catch
         try {
             // si no esta BBDD, creamos una
@@ -182,7 +181,7 @@ public class UsuariosHelper extends SQLiteOpenHelper {
         String[] selectionArgs = {usuario};
 
         String user = null;
-        String passDelUser = null;
+        String passDelUser;
 
         // nos devuelve una tabla virtual resultSet
 
@@ -208,11 +207,13 @@ public class UsuariosHelper extends SQLiteOpenHelper {
             user = cursor.getString(0); // cojemos columna cero
             passDelUser = cursor.getString(1); // cojemos columna 1
             Log.d(TAG, "cursor BBDD   usuario: " + user + "  contraseña: " + passDelUser);
+            cursor.close();
         } catch (Exception e) {
             Log.d(TAG, "usuario: no encontrado");
         }
 
         Log.d(TAG, "salimos buscarContraseñao");
+
         return user;
     }// fin buscarContraseniaDelUsuario
 
@@ -220,9 +221,9 @@ public class UsuariosHelper extends SQLiteOpenHelper {
     /**
      * metodo para devolver puntuacion del juego 2048
      *
-     * @param usuario
-     * @param db
-     * @return
+     * @param usuario usuario
+     * @param db DDBB
+     * @return return
      */
     public int buscarPuntuacion2048DelUsuario(String usuario, SQLiteDatabase db) {
         Log.d(TAG, "entramos buscarPuntuacion2048 del usuario");
@@ -230,7 +231,7 @@ public class UsuariosHelper extends SQLiteOpenHelper {
         // array de columnas que nos devuelve consulta, aqui nos interesa puntuacion2048
         String[] projection = {
                 COLUMNA_USUARIO,
-                String.valueOf(COLUMNA_PUNTUACION_2048)
+                COLUMNA_PUNTUACION_2048
         };
 
         // filtro WHERE para consulta, para consulta preparada
@@ -238,8 +239,8 @@ public class UsuariosHelper extends SQLiteOpenHelper {
         // de donde vienen criterios
         String[] selectionArgs = {usuario};
 
-        String user = null;
-        int puntuacionDelUser = Integer.parseInt(null);
+        String user ;
+        int puntuacionDelUser = -1;
 
         // nos devuelve una tabla virtual resultSet
         // sort
@@ -264,6 +265,7 @@ public class UsuariosHelper extends SQLiteOpenHelper {
             user = cursor.getString(0); // cojemos columna cero
             puntuacionDelUser = cursor.getInt(1); // cojemos columna 1
             Log.d(TAG, "cursor  usuario: " + user + "  puntuacioon 2048: " + puntuacionDelUser);
+            cursor.close();
         } catch (Exception e) {
             Log.d(TAG, "usuario: no encontrado");
         }
@@ -277,14 +279,14 @@ public class UsuariosHelper extends SQLiteOpenHelper {
      * Metodo para actualizar BBDD
      * insertamos en campo puntuacion 2048 nuevo valor para un usuario concreto
      *
-     * @param usuario
-     * @param db
-     * @param puntuacion2048
+     * @param usuario usuario
+     * @param db DDBB
+     * @param puntuacion2048 puntuacion del juego 2048
      */
     public void modificarPuntuacionDelUsuario2048(String usuario, SQLiteDatabase db, int puntuacion2048) {
         Log.d(TAG, "entramos modificar puntuacio del usuario " + usuario + " | puntuacion nueva es: " + puntuacion2048);
         ContentValues values = new ContentValues();
-        values.put(String.valueOf(COLUMNA_PUNTUACION_2048), puntuacion2048);
+        values.put(COLUMNA_PUNTUACION_2048, puntuacion2048);
 
         String selection = COLUMNA_USUARIO + " LIKE ?";
         String[] selectionArgs = {usuario};
@@ -300,8 +302,8 @@ public class UsuariosHelper extends SQLiteOpenHelper {
     /**
      * Metodo para borra un usuario
      *
-     * @param usuario
-     * @param db
+     * @param usuario usuario
+     * @param db DDBB
      */
     public void borrarUsuario(String usuario, SQLiteDatabase db) {
         Log.d(TAG, "entramos borrarUsuario");
@@ -316,8 +318,8 @@ public class UsuariosHelper extends SQLiteOpenHelper {
     /**
      * Metodo para buscar en la BBDD mayor puntuacion 2048
      *
-     * @param db
-     * @return
+     * @param db DDBB
+     * @return return int
      */
     public int buscarPuntuacionMax2048(SQLiteDatabase db) {
         Log.d(TAG, "entramos buscarPuntuacion2048");
@@ -328,7 +330,7 @@ public class UsuariosHelper extends SQLiteOpenHelper {
                 COLUMNA_PUNTUACION_2048
         };
 
-        String user;
+        // String user;
         int puntuacionMaxEnDDBB = 0;
 
         // nos devuelve una tabla virtual resultSet
@@ -354,6 +356,7 @@ public class UsuariosHelper extends SQLiteOpenHelper {
             //user = cursor.getString(0); // cojemos columna cero
             puntuacionMaxEnDDBB = cursor.getInt(0); // cojemos columna 1
             Log.d(TAG, "cursor  |  puntuacioon max 2048: " + puntuacionMaxEnDDBB);
+            cursor.close();
         } catch (Exception e) {
             Log.d(TAG, "usuario: no encontrado");
         }
@@ -363,24 +366,6 @@ public class UsuariosHelper extends SQLiteOpenHelper {
     }// fin buscarPuntuacionMaxima2048
 
 
-    /**
-     * Metodo devuelve una fila de DDBB
-     * @return
-     */
-//    public Cursor getRaw(SQLiteDatabase db){
-//
-//        Log.d(TAG, "entramos buscarPuntuacion2048 del usuario");
-//
-//        // array de columnas que nos devuelve consulta, cojemos 3 columnas : id, nombre y puntuacion 2048
-//        String[] projection = {
-//                COLUMNA_ID,
-//                COLUMNA_USUARIO,
-//                String.valueOf(COLUMNA_PUNTUACION_2048)
-//        };
-//        //Cursor cursor = db.rawQuery(projection,null);
-//        return cursor;
-//
-//    }
 
     /**
      * Metodo para mostrar resultado
@@ -394,7 +379,6 @@ public class UsuariosHelper extends SQLiteOpenHelper {
                 COLUMNA_PUNTUACION_2048
         };
 
-        int identificador;
         String user;
         int puntuacionDelUser = 0;
 
@@ -421,14 +405,14 @@ public class UsuariosHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
             user = cursor.getString(0); // cojemos columna 1
             puntuacionDelUser = cursor.getInt(1); // cojemos columna 2
-            fila = fila + " usuariuo: "+user+" | puntuacion "+puntuacionDelUser +"\n";
+            fila = fila +"*****************************"+"\n"+ "USUARIO:            "+user+"\n"+"PUNTUACION:    "+puntuacionDelUser +"\n";
 
             while (cursor.moveToNext()){
 
                 user = cursor.getString(0); // cojemos columna 1
                 puntuacionDelUser = cursor.getInt(1); // cojemos columna 2
 
-                fila = fila + " usuariuo: "+user+" | puntuacion "+puntuacionDelUser +"\n";
+                fila = fila +"*****************************"+"\n"+ "USUARIO:            "+user+"\n"+"PUNTUACION:    "+puntuacionDelUser +"\n";
 
                 Log.d(TAG, "cursor  usuario: " + user + " |  puntuacioon 2048: " + puntuacionDelUser);
             }
@@ -441,7 +425,70 @@ public class UsuariosHelper extends SQLiteOpenHelper {
         }
         Log.d(TAG, "salimos buscarPuntuacionMaxima ");
 
+    } // fin mostrar usuarios con puntiuacion
 
-    } // fin
+    public void mostrarTodosUsuariosConPuntuacion(TextView textView, SQLiteDatabase db, String orderBy) {
+        Log.d(TAG, "entramos buscarPuntuacion2048 sort");
+
+        // array de columnas que nos devuelve consulta, aqui nos interesa puntuacion2048
+        String[] projection = {
+                COLUMNA_USUARIO,
+                COLUMNA_PUNTUACION_2048
+        };
+
+        String user;
+        int puntuacionDelUser = -1;
+
+        // nos devuelve una tabla virtual resultSet
+        // sort
+        //String sortOrder = COLUMNA_ID + " DESC";
+        String sortOrder = orderBy + " DESC";
+        try {
+
+            // consulta
+            Cursor cursor = db.query(
+                    TABLE_NAME,
+                    projection,
+                    null,
+                    null,
+                    null,
+                    null,
+                    sortOrder
+            );
+
+            // hay que leer resultSet
+            // hay que comprobar que cursor no es nulo
+            if( cursor != null && cursor.moveToFirst() ){
+                String fila = "\n";
+                cursor.moveToFirst();
+                user = cursor.getString(0); // cojemos columna 0
+                puntuacionDelUser = cursor.getInt(1); // cojemos columna 1
+                fila = fila +"*****************************"+"\n"+ "USUARIO:            "+user+"\n"+"PUNTUACION:    "+puntuacionDelUser +"\n";
+
+                while (cursor.moveToNext()){
+
+                    user = cursor.getString(0); // cojemos columna 0
+                    puntuacionDelUser = cursor.getInt(1); // cojemos columna 1
+
+                    fila = fila +"*****************************"+"\n"+ "USUARIO:            "+user+"\n"+"PUNTUACION:    "+puntuacionDelUser +"\n";
+
+                    Log.d(TAG, "cursor  usuario: " + user + " |  puntuacioon 2048: " + puntuacionDelUser);
+                }
+                textView.setText(fila);
+                cursor.close();
+            }
+            try{
+                cursor.close();
+            }catch(Exception e){
+                Log.d(TAG , " error al cerrar cursor | "+e.getMessage());
+            }
+
+        } catch (Exception e) {
+            Log.d(TAG, "error buscar puntuacion de todos usuarios con sort "+e.getMessage());
+
+        }
+        Log.d(TAG, "salimos buscarPuntuacion todos usuarios con sort");
+
+    } // fin mostrar usuarios con puntiuacion
 
 }
