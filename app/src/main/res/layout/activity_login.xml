@@ -12,9 +12,10 @@
 
     <EditText
         android:id="@+id/login_activity_editText_name"
-        android:layout_width="372dp"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginTop="64dp"
+
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
@@ -26,7 +27,7 @@
 
     <EditText
         android:id="@+id/login_activity_editText_password"
-        android:layout_width="367dp"
+        android:layout_width="300dp"
         android:layout_height="48dp"
         android:ems="10"
         android:hint="Password"

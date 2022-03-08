@@ -10,7 +10,6 @@ public class Usuario {
     int puntuacion_2048;
     int puntuacion_peg;
 
-    // CONSTRUCTOR
     // CONSTRUCTOR CON TODOS ATRIBUTOS
     public Usuario(int id, String nombre, String password, int puntuacion_2048, int puntuacion_peg) {
         this.id = id;

@@ -18,8 +18,6 @@ import java.util.ArrayList;
  */
 public class UsuariosHelper extends SQLiteOpenHelper {
 
-    //  variable para log
-    // private static final String TAG = UsuariosHelper.class.getSimpleName();
     private static final String TAG = "BBDD";
 
     // CONSTANTES PARA TABLA
@@ -36,9 +34,6 @@ public class UsuariosHelper extends SQLiteOpenHelper {
     public static final String COLUMNA_CONTRASENIA = "Contrasenia";
     public static final String COLUMNA_PUNTUACION_2048 = "Puntuacion_2048";
     public static final String COLUMNA_PUNTUACION_PEG = "Puntuacion_Peg";
-
-    // CREAMOS ARRAY DE COLUMNAS
-    //private static final String[] COLUMNAS = {COLUMNA_ID, COLUMNA_USUARIO, COLUMNA_CONTRASENIA, COLUMNA_PUNTUACION_2048, COLUMNA_PUNTUACION_PEG};
 
     // ARRAYLIST DE USUARIOS INICIALES
     private final ArrayList<Usuario> listaUsuariosIniciales = new ArrayList<>();

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 public class SplashActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +23,6 @@ public class SplashActivity extends AppCompatActivity {
         TextView espantapajarosImagen = findViewById(R.id.tv_espantapajaros);
         // identificamos nueva clase de TextWriter, campo donde va aparecer texto
         TypeWriter typeWriter = findViewById(R.id.tv_desc_espanta);
-
-
-
 
         // cargamos animacion de fadeIn
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -42,9 +38,7 @@ public class SplashActivity extends AppCompatActivity {
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
-
             /**
              * cuando animacion fadeIn termina
              * @param animation

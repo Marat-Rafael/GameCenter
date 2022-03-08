@@ -19,7 +19,6 @@ public class SoundPlayer {
     private static int zvuk1;
     private static int zvuk2;
     private static int musica;
-
         // --- soundPool is Depricated in api 21 (lolipop
         // -----opcional
     private AudioAttributes audioAttributes;
@@ -46,7 +45,6 @@ public class SoundPlayer {
         // public SoundPool (int maxStreams, int streamType, int srcQuality)
         // fila siguente comentamos porque esta en la parte opcional
         // sSoundPool = new SoundPool(6, AudioManager.STREAM_MUSIC,0);
-
         shot = soundPool.load(context,R.raw.rev,1);
         recoil = soundPool.load(context,R.raw.kurok_rev,1);
         type = soundPool.load(context,R.raw.single_key_type,1);
@@ -56,20 +54,9 @@ public class SoundPlayer {
         zvuk1 = soundPool.load(context,R.raw.zvuk1,1);
         zvuk2 = soundPool.load(context,R.raw.zvuk2,1);
         musica = soundPool.load(context,R.raw.max_payne,1);
-
     }
 
     // ------------------------------- METODOS -----------------------------------------------------
-
-    public void playRecoil(){
-        // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
-        soundPool.play(recoil,1.0f,1.0f,1,0,1.0f);
-    }
-
-    public void playShoot(){
-        // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
-        soundPool.play(shot,1.0f,1.0f,1,0,1.0f);
-    }
 
     public void playType(){
         // final int	play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)

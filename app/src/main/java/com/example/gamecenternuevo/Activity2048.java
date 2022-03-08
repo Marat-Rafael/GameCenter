@@ -44,8 +44,6 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     UsuariosHelper helper;
     SQLiteDatabase db;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -14,41 +14,35 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-
     EditText name;
     EditText password;
     Button login;
     Button cancelar;
     Button crearNuevoUsuario;
-
+    String passwordDesdeBBDD;
+    String passwordIntroducido;
+    String nombreUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         name = findViewById(R.id.login_activity_editText_name);
         password = findViewById(R.id.login_activity_editText_password);
         login = findViewById(R.id.login_activity_button_login);
         cancelar = findViewById(R.id.login_activity_button_cancelar);
         crearNuevoUsuario = findViewById(R.id.login_activity_button_crear_nuevo);
-
         // creamos instancia de BBDD
         UsuariosHelper helper = new UsuariosHelper(this);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SQLiteDatabase db = helper.getReadableDatabase();
-
                 // cojemos datos del campo name
-                String nombreUsuario = name.getText().toString();
-                String passwordIntroducido = password.getText().toString();
+                nombreUsuario = name.getText().toString();
+                passwordIntroducido = password.getText().toString();
                 // cojemos contraseña de la base de datos
-                String passwordDesdeBBDD = helper.buscarContraseniaDelUsuario(nombreUsuario,db);
-
-                // campoMostrar.setText(nombreUsuario+ "  "+passwordDesdeBBDD);
-
+                passwordDesdeBBDD = helper.buscarContraseniaDelUsuario(nombreUsuario,db);
                 // si datos coinciden
                 if(passwordIntroducido.equals(passwordDesdeBBDD)){
                     password.setBackground(null);
@@ -62,8 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                     password.setBackgroundResource(R.drawable.casilla_red);
                     Toast.makeText(LoginActivity.this, "ontraseña erronea", Toast.LENGTH_SHORT).show();
                 }
-
-
             }// fin onclick
         }); // fin setOnClick login
 
@@ -73,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                 name.setText("");
                 password.setText("");
                 password.setBackground(null);
-
                 cerrarTeclado();
             }
         }); // fin setOnClick cancelar

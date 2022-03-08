@@ -15,9 +15,6 @@ import android.widget.Toast;
  */
 public class NuevoUsuarioActivity extends AppCompatActivity {
 
-
-    //  variable para log
-    //private static final String TAG = UsuariosHelper.class.getSimpleName();
     private static final String TAG = "BBDD";
 
     Button button_crear;
