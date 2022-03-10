@@ -894,7 +894,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                      // comprobamos si superamos puntuacion maxima del juego
                     if(puntuacionJuegoActual > puntuacionMaximaDelJugadorActual){
                         Log.d(TAG," entramos if puntuacion actual supera la del BBDD");
-                        // aqui guardamos puntuacion ??
+                        // aqui guardamos puntuacion
                         helper.modificarPuntuacionDelUsuario2048(usuarioActual,db, puntuacionJuegoActual);
 
                         int puntuacionActualizada = helper.buscarPuntuacionMax2048(db);
