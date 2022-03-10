@@ -31,6 +31,8 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
     private TextView TextViewpuntuacion;
     private int puntuacionJuegoActual;
     private int puntuacionMaxima;
+    private int puntuacionMaximaDelJugadorActual;
+
     String usuarioActual;
     final String TAG = "juego";
     TextView auxTextView;
@@ -66,6 +68,9 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
 
         // sacamos campo puntuacion maxima de BBDD
         puntuacionMaxima = helper.buscarPuntuacionMax2048(db);
+
+        // cojemos puntuacion maxima del jugador actual
+        puntuacionMaximaDelJugadorActual = helper.buscarPuntuacion2048DelUsuario(usuarioActual,db);
 
 
         // insertamos valores del usuario actual y puntuacion maxima en textView
@@ -848,7 +853,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                     puntuacionJuegoActual = puntuacionJuegoActual + numeroSumado;
 
                     // comprobamos si superamos puntuacion maxima del juego
-                    if(puntuacionJuegoActual > puntuacionMaxima){
+                    if(puntuacionJuegoActual > puntuacionMaximaDelJugadorActual){
                         Log.d(TAG," entramos if puntuacion actual supera la del BBDD");
                         // aqui guardamos puntuacion ??
                         helper.modificarPuntuacionDelUsuario2048(usuarioActual,db, puntuacionJuegoActual);
@@ -887,7 +892,7 @@ public class Activity2048 extends AppCompatActivity implements View.OnTouchListe
                     puntuacionJuegoActual = puntuacionJuegoActual +numeroSumado;
 
                      // comprobamos si superamos puntuacion maxima del juego
-                    if(puntuacionJuegoActual > puntuacionMaxima){
+                    if(puntuacionJuegoActual > puntuacionMaximaDelJugadorActual){
                         Log.d(TAG," entramos if puntuacion actual supera la del BBDD");
                         // aqui guardamos puntuacion ??
                         helper.modificarPuntuacionDelUsuario2048(usuarioActual,db, puntuacionJuegoActual);
